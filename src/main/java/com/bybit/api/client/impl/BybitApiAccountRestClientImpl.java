@@ -1,6 +1,11 @@
 package com.bybit.api.client.impl;
 
 import com.bybit.api.client.domain.account.request.BatchSetCollateralCoinRequest;
+import com.bybit.api.client.domain.account.request.ManualBorrowRequest;
+import com.bybit.api.client.domain.account.request.ManualRepayRequest;
+import com.bybit.api.client.domain.account.request.NoConvertRepayRequest;
+import com.bybit.api.client.domain.account.request.OneClickRepayRequest;
+import com.bybit.api.client.domain.account.request.SetPriceLimitRequest;
 import com.bybit.api.client.restApi.BybitApiAccountRestClient;
 import com.bybit.api.client.restApi.BybitApiService;
 import com.bybit.api.client.domain.account.request.AccountDataRequest;
@@ -141,5 +146,50 @@ public class BybitApiAccountRestClientImpl implements BybitApiAccountRestClient 
     @Override
     public Object getAccountSMPGroup() {
         return executeSync(bybitApiService.getAccountSMPGroupId());
+    }
+
+    @Override
+    public Object getAccountInstruments(String category, String symbol, Integer limit, String cursor) {
+        return executeSync(bybitApiService.getAccountInstruments(category, symbol, limit, cursor));
+    }
+
+    @Override
+    public Object getDcpInfo() {
+        return executeSync(bybitApiService.getDcpInfo());
+    }
+
+    @Override
+    public Object getTransferableAmount(String coinName) {
+        return executeSync(bybitApiService.getTransferableAmount(coinName));
+    }
+
+    @Override
+    public Object getUserSettings() {
+        return executeSync(bybitApiService.getUserSettings());
+    }
+
+    @Override
+    public Object manualBorrow(ManualBorrowRequest manualBorrowRequest) {
+        return executeSync(bybitApiService.manualBorrow(manualBorrowRequest));
+    }
+
+    @Override
+    public Object manualRepay(ManualRepayRequest manualRepayRequest) {
+        return executeSync(bybitApiService.manualRepay(manualRepayRequest));
+    }
+
+    @Override
+    public Object noConvertRepay(NoConvertRepayRequest noConvertRepayRequest) {
+        return executeSync(bybitApiService.noConvertRepay(noConvertRepayRequest));
+    }
+
+    @Override
+    public Object oneClickRepay(OneClickRepayRequest oneClickRepayRequest) {
+        return executeSync(bybitApiService.oneClickRepay(oneClickRepayRequest));
+    }
+
+    @Override
+    public Object setPriceLimit(SetPriceLimitRequest setPriceLimitRequest) {
+        return executeSync(bybitApiService.setPriceLimit(setPriceLimitRequest));
     }
 }

@@ -23,4 +23,10 @@ public interface BybitApiMarketRestClient {
     Object getDeliveryPrice(MarketDataRequest deliveryPriceRequest);
     Object getMarketAccountRatio(MarketDataRequest marketAccountRatioRequest);
     Object getAnnouncementInfo(MarketDataRequest announcementInfoRequest);
+    Object getAdlAlert(String symbol);
+    Object getFeeGroupInfo(String productType, String groupId);
+    Object getIndexPriceComponents(String indexName);
+    Object getNewDeliveryPrice(String category, String baseCoin, String settleCoin);
+    Object getOrderPriceLimit(String category, String symbol);
+    Object getRpiOrderbook(String category, String symbol, Integer limit);
 }

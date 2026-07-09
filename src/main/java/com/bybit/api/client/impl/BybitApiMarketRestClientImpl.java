@@ -202,4 +202,34 @@ public class BybitApiMarketRestClientImpl implements BybitApiMarketRestClient {
                 marketAccountRatioRequest.getLimit()
         ));
     }
+
+    @Override
+    public Object getAdlAlert(String symbol) {
+        return executeSync(bybitApiService.getAdlAlert(symbol));
+    }
+
+    @Override
+    public Object getFeeGroupInfo(String productType, String groupId) {
+        return executeSync(bybitApiService.getFeeGroupInfo(productType, groupId));
+    }
+
+    @Override
+    public Object getIndexPriceComponents(String indexName) {
+        return executeSync(bybitApiService.getIndexPriceComponents(indexName));
+    }
+
+    @Override
+    public Object getNewDeliveryPrice(String category, String baseCoin, String settleCoin) {
+        return executeSync(bybitApiService.getNewDeliveryPrice(category, baseCoin, settleCoin));
+    }
+
+    @Override
+    public Object getOrderPriceLimit(String category, String symbol) {
+        return executeSync(bybitApiService.getOrderPriceLimit(category, symbol));
+    }
+
+    @Override
+    public Object getRpiOrderbook(String category, String symbol, Integer limit) {
+        return executeSync(bybitApiService.getRpiOrderbook(category, symbol, limit));
+    }
 }

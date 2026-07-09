@@ -22,4 +22,9 @@ public class BybitApiAsyncAffiliateRestClientImpl implements BybitApiAsyncAffili
                 request.getSize()
         ).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
+
+    @Override
+    public void getAffiliateSubList(String cursor, Integer size, String startDate, String endDate, Long subAffId, BybitApiCallback<Object> callback) {
+        bybitApiService.getAffiliateSubList(cursor, size, startDate, endDate, subAffId).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
 }

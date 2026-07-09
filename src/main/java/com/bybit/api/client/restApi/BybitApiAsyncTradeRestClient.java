@@ -3,6 +3,7 @@ package com.bybit.api.client.restApi;
 import com.bybit.api.client.domain.position.request.PositionDataRequest;
 import com.bybit.api.client.domain.trade.request.BatchOrderRequest;
 import com.bybit.api.client.domain.trade.request.BatchOrderRequest;
+import com.bybit.api.client.domain.trade.request.PreCheckOrderRequest;
 import com.bybit.api.client.domain.trade.request.TradeOrderRequest;
 
 import java.io.IOException;
@@ -30,4 +31,5 @@ public interface BybitApiAsyncTradeRestClient {
     void cancelOrder(TradeOrderRequest order, BybitApiCallback<Object> callback);
     void cancelAllOrder(TradeOrderRequest order, BybitApiCallback<Object> callback);
     void amendOrder(TradeOrderRequest order, BybitApiCallback<Object> callback);
+    void preCheckOrder(PreCheckOrderRequest preCheckOrderRequest, BybitApiCallback<Object> callback);
 }

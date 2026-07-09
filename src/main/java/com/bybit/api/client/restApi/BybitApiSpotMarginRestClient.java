@@ -33,4 +33,6 @@ public interface BybitApiSpotMarginRestClient {
     Object getNormalSpotMarginTradeBorrowOrders(SpotMarginDataRequest spotMarginDataRequest);
     Object getNormalSpotMarginTradeRepayOrders(SpotMarginDataRequest spotMarginDataRequest);
     Object getSpotMarginInterestRateHistory(SpotMarginDataRequest spotMarginDataRequest);
+    Object getPositionTiers(String currency);
+    Object getTieredCollateralRatio(String currency);
 }

@@ -35,4 +35,5 @@ public interface BybitApiAssetRestClient {
     Object getConvertCoinList(AssetDataRequest request);
     Object getConvertCoinStatus(AssetDataRequest request);
     Object getConvertCoinHistory(AssetDataRequest request);
+    Object queryFundingDetailApi(String createTimeFrom, String createTimeTo, Integer limit, String cursor);
 }

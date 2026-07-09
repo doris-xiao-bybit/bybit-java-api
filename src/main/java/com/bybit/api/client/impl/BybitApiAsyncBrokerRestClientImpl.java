@@ -4,6 +4,7 @@ import com.bybit.api.client.restApi.BybitApiAsyncBrokerRestClient;
 import com.bybit.api.client.restApi.BybitApiCallback;
 import com.bybit.api.client.restApi.BybitApiService;
 import com.bybit.api.client.domain.broker.request.BrokerDataRequest;
+import com.bybit.api.client.domain.broker.request.SetBrokerApiLimitRequest;
 import com.bybit.api.client.service.BybitJsonConverter;
 
 import static com.bybit.api.client.service.BybitApiServiceGenerator.createService;
@@ -64,5 +65,20 @@ public class BybitApiAsyncBrokerRestClientImpl implements BybitApiAsyncBrokerRes
     public void getIssuedVoucher(BrokerDataRequest getIssuedVoucherRequest, BybitApiCallback<Object> callback) {
         var request = converter.mapToBrokerGetIssuedVoucherRequest(getIssuedVoucherRequest);
         bybitApiService.getIssuedVoucher(request).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void queryBrokerAllUidDetails(String uids, Integer limit, String cursor, BybitApiCallback<Object> callback) {
+        bybitApiService.queryBrokerAllUidDetails(uids, limit, cursor).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void queryBrokerCap(BybitApiCallback<Object> callback) {
+        bybitApiService.queryBrokerCap().enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void setBrokerApiLimit(SetBrokerApiLimitRequest setBrokerApiLimitRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.setBrokerApiLimit(setBrokerApiLimitRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 }

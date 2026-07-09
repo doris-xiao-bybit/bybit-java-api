@@ -37,4 +37,6 @@ public interface BybitApiAsyncAssetRestClient {
     void getConvertCoinList(AssetDataRequest request, BybitApiCallback<Object> callback);
     void getConvertCoinStatus(AssetDataRequest request, BybitApiCallback<Object> callback);
     void getConvertCoinHistory(AssetDataRequest request, BybitApiCallback<Object> callback);
+
+    void queryFundingDetailApi(String createTimeFrom, String createTimeTo, Integer limit, String cursor, BybitApiCallback<Object> callback);
 }

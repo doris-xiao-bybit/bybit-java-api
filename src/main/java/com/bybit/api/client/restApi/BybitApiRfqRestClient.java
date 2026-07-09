@@ -1,5 +1,6 @@
 package com.bybit.api.client.restApi;
 
+import com.bybit.api.client.domain.rfq.request.AcceptNonLpQuoteRequest;
 import com.bybit.api.client.domain.rfq.request.RfqDataRequest;
 import com.bybit.api.client.domain.rfq.request.RfqQuoteRequest;
 import com.bybit.api.client.domain.rfq.request.RfqRequest;
@@ -31,4 +32,6 @@ public interface BybitApiRfqRestClient {
     Object getQuotesHistory(RfqDataRequest request);
     Object getRfqTradeHistory(RfqDataRequest request);
     Object getRfqPublicTrades(RfqDataRequest request);
+
+    Object acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest);
 }

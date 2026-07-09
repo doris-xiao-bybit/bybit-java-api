@@ -2,6 +2,11 @@ package com.bybit.api.client.restApi;
 
 import com.bybit.api.client.domain.account.request.AccountDataRequest;
 import com.bybit.api.client.domain.account.request.BatchSetCollateralCoinRequest;
+import com.bybit.api.client.domain.account.request.ManualBorrowRequest;
+import com.bybit.api.client.domain.account.request.ManualRepayRequest;
+import com.bybit.api.client.domain.account.request.NoConvertRepayRequest;
+import com.bybit.api.client.domain.account.request.OneClickRepayRequest;
+import com.bybit.api.client.domain.account.request.SetPriceLimitRequest;
 
 public interface BybitApiAccountRestClient {
     // Account endpoints
@@ -21,4 +26,22 @@ public interface BybitApiAccountRestClient {
     Object resetAccountMMP(AccountDataRequest request);
     Object getAccountMMPState(AccountDataRequest request);
     Object getAccountSMPGroup();
+
+    Object getAccountInstruments(String category, String symbol, Integer limit, String cursor);
+
+    Object getDcpInfo();
+
+    Object getTransferableAmount(String coinName);
+
+    Object getUserSettings();
+
+    Object manualBorrow(ManualBorrowRequest manualBorrowRequest);
+
+    Object manualRepay(ManualRepayRequest manualRepayRequest);
+
+    Object noConvertRepay(NoConvertRepayRequest noConvertRepayRequest);
+
+    Object oneClickRepay(OneClickRepayRequest oneClickRepayRequest);
+
+    Object setPriceLimit(SetPriceLimitRequest setPriceLimitRequest);
 }

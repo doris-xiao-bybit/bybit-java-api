@@ -185,4 +185,14 @@ public class BybitApiSpotMarginRestClientImpl implements BybitApiSpotMarginRestC
                 spotMarginDataRequest.getEndTime()
         ));
     }
+
+    @Override
+    public Object getPositionTiers(String currency) {
+        return executeSync(bybitApiService.getPositionTiers(currency));
+    }
+
+    @Override
+    public Object getTieredCollateralRatio(String currency) {
+        return executeSync(bybitApiService.getTieredCollateralRatio(currency));
+    }
 }

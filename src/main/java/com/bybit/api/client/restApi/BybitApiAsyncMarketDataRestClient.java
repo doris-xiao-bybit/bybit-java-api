@@ -23,4 +23,16 @@ public interface BybitApiAsyncMarketDataRestClient {
     void getDeliveryPrice(MarketDataRequest deliveryPriceRequest, BybitApiCallback<Object> callback);
     void getMarketAccountRatio(MarketDataRequest marketAccountRatioRequest, BybitApiCallback<Object> callback);
     void getAnnouncementInfo(MarketDataRequest announcementInfoRequest, BybitApiCallback<Object> callback);
+
+    void getAdlAlert(String symbol, BybitApiCallback<Object> callback);
+
+    void getFeeGroupInfo(String productType, String groupId, BybitApiCallback<Object> callback);
+
+    void getIndexPriceComponents(String indexName, BybitApiCallback<Object> callback);
+
+    void getNewDeliveryPrice(String category, String baseCoin, String settleCoin, BybitApiCallback<Object> callback);
+
+    void getOrderPriceLimit(String category, String symbol, BybitApiCallback<Object> callback);
+
+    void getRpiOrderbook(String category, String symbol, Integer limit, BybitApiCallback<Object> callback);
 }

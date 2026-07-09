@@ -1,6 +1,11 @@
 package com.bybit.api.client.impl;
 
 import com.bybit.api.client.domain.account.request.BatchSetCollateralCoinRequest;
+import com.bybit.api.client.domain.account.request.ManualBorrowRequest;
+import com.bybit.api.client.domain.account.request.ManualRepayRequest;
+import com.bybit.api.client.domain.account.request.NoConvertRepayRequest;
+import com.bybit.api.client.domain.account.request.OneClickRepayRequest;
+import com.bybit.api.client.domain.account.request.SetPriceLimitRequest;
 import com.bybit.api.client.restApi.BybitApiAsyncAccountRestClient;
 import com.bybit.api.client.restApi.BybitApiCallback;
 import com.bybit.api.client.restApi.BybitApiService;
@@ -140,5 +145,50 @@ public class BybitApiAsyncAccountRestClientImpl implements BybitApiAsyncAccountR
     public void setAccountSpotHedging(AccountDataRequest request, BybitApiCallback<Object> callback) {
         var setSpotHedging = converter.mapToSetSpotHedgingModeRequest(request);
         bybitApiService.setAccountSpotHedging(setSpotHedging).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getAccountInstruments(String category, String symbol, Integer limit, String cursor, BybitApiCallback<Object> callback) {
+        bybitApiService.getAccountInstruments(category, symbol, limit, cursor).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getDcpInfo(BybitApiCallback<Object> callback) {
+        bybitApiService.getDcpInfo().enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getTransferableAmount(String coinName, BybitApiCallback<Object> callback) {
+        bybitApiService.getTransferableAmount(coinName).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getUserSettings(BybitApiCallback<Object> callback) {
+        bybitApiService.getUserSettings().enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void manualBorrow(ManualBorrowRequest manualBorrowRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.manualBorrow(manualBorrowRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void manualRepay(ManualRepayRequest manualRepayRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.manualRepay(manualRepayRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void noConvertRepay(NoConvertRepayRequest noConvertRepayRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.noConvertRepay(noConvertRepayRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void oneClickRepay(OneClickRepayRequest oneClickRepayRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.oneClickRepay(oneClickRepayRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void setPriceLimit(SetPriceLimitRequest setPriceLimitRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.setPriceLimit(setPriceLimitRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 }

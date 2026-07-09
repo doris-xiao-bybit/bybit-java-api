@@ -275,4 +275,9 @@ public class BybitApiAssetRestClientImpl implements BybitApiAssetRestClient {
                 request.getLimit()
                 ));
     }
+
+    @Override
+    public Object queryFundingDetailApi(String createTimeFrom, String createTimeTo, Integer limit, String cursor) {
+        return executeSync(bybitApiService.queryFundingDetailApi(createTimeFrom, createTimeTo, limit, cursor));
+    }
 }

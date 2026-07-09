@@ -1,5 +1,6 @@
 package com.bybit.api.client.impl;
 
+import com.bybit.api.client.domain.rfq.request.AcceptNonLpQuoteRequest;
 import com.bybit.api.client.domain.rfq.request.RfqDataRequest;
 import com.bybit.api.client.domain.rfq.request.RfqLeg;
 import com.bybit.api.client.domain.rfq.request.RfqQuoteRequest;
@@ -228,5 +229,10 @@ public class BybitApiRfqRestClientImpl implements BybitApiRfqRestClient {
             result.add(legMap);
         }
         return result;
+    }
+
+    @Override
+    public Object acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest) {
+        return executeSync(bybitApiService.acceptNonLpQuote(acceptNonLpQuoteRequest));
     }
 }

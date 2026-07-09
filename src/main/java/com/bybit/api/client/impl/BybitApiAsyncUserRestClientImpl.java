@@ -5,6 +5,8 @@ import com.bybit.api.client.restApi.BybitApiCallback;
 import com.bybit.api.client.restApi.BybitApiService;
 import com.bybit.api.client.domain.preupgrade.PreUpgradeDataRequest;
 import com.bybit.api.client.domain.user.UserDataRequest;
+import com.bybit.api.client.domain.user.request.DeleteSubMemberV5Request;
+import com.bybit.api.client.domain.user.request.SignAgreementRequest;
 import com.bybit.api.client.domain.user.request.UserSubMemberRequest;
 import com.bybit.api.client.service.BybitJsonConverter;
 
@@ -186,5 +188,25 @@ public class BybitApiAsyncUserRestClientImpl implements BybitApiAsyncUserRestCli
                 subUserRequest.getCursor()
         ).enqueue(new BybitApiCallbackAdapter<>(callback));
 
+    }
+
+    @Override
+    public void deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request, BybitApiCallback<Object> callback) {
+        bybitApiService.deleteSubMemberV5(deleteSubMemberV5Request).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void queryEscrowSubMembersV5(Long nextCursor, Integer pageSize, BybitApiCallback<Object> callback) {
+        bybitApiService.queryEscrowSubMembersV5(nextCursor, pageSize).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void queryReferrals(String cursor, Integer size, String status, BybitApiCallback<Object> callback) {
+        bybitApiService.queryReferrals(cursor, size, status).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void signAgreement(SignAgreementRequest signAgreementRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.signAgreement(signAgreementRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 }

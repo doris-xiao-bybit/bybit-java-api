@@ -278,4 +278,9 @@ public class BybitApiAsyncAssetRestClientImpl implements BybitApiAsyncAssetRestC
         ).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 
+    @Override
+    public void queryFundingDetailApi(String createTimeFrom, String createTimeTo, Integer limit, String cursor, BybitApiCallback<Object> callback) {
+        bybitApiService.queryFundingDetailApi(createTimeFrom, createTimeTo, limit, cursor).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
 }

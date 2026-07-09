@@ -2,6 +2,8 @@ package com.bybit.api.client.restApi;
 
 import com.bybit.api.client.domain.preupgrade.PreUpgradeDataRequest;
 import com.bybit.api.client.domain.user.UserDataRequest;
+import com.bybit.api.client.domain.user.request.DeleteSubMemberV5Request;
+import com.bybit.api.client.domain.user.request.SignAgreementRequest;
 
 public interface BybitApiUserRestClient {
     // User Data
@@ -28,4 +30,9 @@ public interface BybitApiUserRestClient {
     Object getSubUIDListUnlimited(UserDataRequest subUserRequest);
     Object getSubUIDListUnlimited();
     Object getSubAccAllAPIKeyInfo(UserDataRequest subUserRequest);
+
+    Object deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request);
+    Object queryEscrowSubMembersV5(Long nextCursor, Integer pageSize);
+    Object queryReferrals(String cursor, Integer size, String status);
+    Object signAgreement(SignAgreementRequest signAgreementRequest);
 }
