@@ -16,10 +16,10 @@ import com.bybit.api.client.domain.p2p.request.ReleaseAssetsRequest;
 import com.bybit.api.client.domain.p2p.request.RemoveAdRequest;
 import com.bybit.api.client.domain.p2p.request.SendChatMessageRequest;
 import com.bybit.api.client.domain.p2p.request.UpdateAdRequest;
-import com.bybit.api.client.domain.p2p.request.UploadChatFileRequest;
+import okhttp3.MultipartBody;
 
 public interface BybitApiAsyncP2pRestClient {
-    void getAccountInfoPost(GetAccountInfoRequest getAccountInfoRequest, BybitApiCallback<Object> callback);
+    void getAccountInfo(GetAccountInfoRequest getAccountInfoRequest, BybitApiCallback<Object> callback);
 
     void getAds(GetAdsRequest getAdsRequest, BybitApiCallback<Object> callback);
 
@@ -51,5 +51,5 @@ public interface BybitApiAsyncP2pRestClient {
 
     void updateAd(UpdateAdRequest updateAdRequest, BybitApiCallback<Object> callback);
 
-    void uploadChatFile(UploadChatFileRequest uploadChatFileRequest, BybitApiCallback<Object> callback);
+    void uploadChatFile(MultipartBody.Part uploadFile, BybitApiCallback<Object> callback);
 }

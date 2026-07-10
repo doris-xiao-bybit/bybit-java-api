@@ -6,7 +6,7 @@ import com.bybit.api.client.domain.fiat.request.ConfirmQuoteV2Request;
 public interface BybitApiAsyncFiatRestClient {
     void applyQuote(ApplyQuoteRequest applyQuoteRequest, BybitApiCallback<Object> callback);
 
-    void confirmQuotePost(ConfirmQuoteV2Request confirmQuoteV2Request, BybitApiCallback<Object> callback);
+    void confirmQuote(ConfirmQuoteV2Request confirmQuoteV2Request, BybitApiCallback<Object> callback);
 
     void getReferencePrice(String symbol, String paymentMethod, BybitApiCallback<Object> callback);
 

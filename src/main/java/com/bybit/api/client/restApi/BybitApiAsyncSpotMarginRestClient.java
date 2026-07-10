@@ -48,13 +48,23 @@ public interface BybitApiAsyncSpotMarginRestClient {
 
     void repayNormalSpotMarginTrade(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback);
 
-    void getNormalSpotMarginTradeBorrowOrders(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback);
+    default void getNormalSpotMarginTradeBorrowOrders(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getNormalSpotMarginTradeBorrowOrders is not implemented by this client");
+    }
 
-    void getNormalSpotMarginTradeRepayOrders(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback);
+    default void getNormalSpotMarginTradeRepayOrders(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getNormalSpotMarginTradeRepayOrders is not implemented by this client");
+    }
 
-    void getSpotMarginInterestRateHistory(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback);
+    default void getSpotMarginInterestRateHistory(SpotMarginDataRequest spotMarginDataRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getSpotMarginInterestRateHistory is not implemented by this client");
+    }
 
-    void getPositionTiers(String currency, BybitApiCallback<Object> callback);
+    default void getPositionTiers(String currency, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getPositionTiers is not implemented by this client");
+    }
 
-    void getTieredCollateralRatio(String currency, BybitApiCallback<Object> callback);
+    default void getTieredCollateralRatio(String currency, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getTieredCollateralRatio is not implemented by this client");
+    }
 }

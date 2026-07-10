@@ -1,6 +1,18 @@
 # Changelog
 
-## 1.4.1 — 2027-07-09
+## 1.5.0 — 2026-07-09
+
+### Added — New Clients
+- BybitApiEarnRestClient / BybitApiAsyncEarnRestClient (69 methods)
+- BybitApiFiatRestClient / BybitApiAsyncFiatRestClient (7 methods)
+- BybitApiP2pRestClient / BybitApiAsyncP2pRestClient (17 methods)
+- New factory methods: `newEarnRestClient` / `newAsyncEarnRestClient` / `newFiatRestClient` / `newAsyncFiatRestClient` / `newP2pRestClient` / `newAsyncP2pRestClient`
+
+### Binary Compatibility
+- 30 methods added to existing sync interfaces and 30 methods added to their async counterparts
+  (Account/Trade/Market/User/Affiliate/Asset/Broker/Rfq/SpotMargin).
+  All new interface methods are declared `default` (throwing `UnsupportedOperationException`)
+  so existing downstream implementers remain source- and binary-compatible.
 
 ### New Methods (121)
 - getAccountInstruments
@@ -13,7 +25,7 @@
 - oneClickRepay
 - setPriceLimit
 - getAffiliateSubList
-- queryFundingDetailApi
+- queryFundingDetail
 - queryBrokerAllUidDetails
 - queryBrokerCap
 - setBrokerApiLimit
@@ -87,7 +99,7 @@
 - removeLiquidity
 - setFixedTermAutoInvest
 - applyQuote
-- confirmQuotePost
+- confirmQuote
 - getReferencePrice
 - queryBalance
 - queryCoinList
@@ -99,7 +111,7 @@
 - getNewDeliveryPrice
 - getOrderPriceLimit
 - getRpiOrderbook
-- getAccountInfoPost
+- getAccountInfo
 - getAds
 - getAllOrders
 - getChatMessages
@@ -175,7 +187,6 @@
 - RemoveAdRequest
 - SendChatMessageRequest
 - UpdateAdRequest
-- UploadChatFileRequest
 - AcceptNonLpQuoteRequest
 - PreCheckOrderRequest
 - DeleteSubMemberV5Request

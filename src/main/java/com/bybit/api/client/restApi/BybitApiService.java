@@ -55,8 +55,8 @@ import com.bybit.api.client.domain.p2p.request.ReleaseAssetsRequest;
 import com.bybit.api.client.domain.p2p.request.RemoveAdRequest;
 import com.bybit.api.client.domain.p2p.request.SendChatMessageRequest;
 import com.bybit.api.client.domain.p2p.request.UpdateAdRequest;
-import com.bybit.api.client.domain.p2p.request.UploadChatFileRequest;
 import com.bybit.api.client.domain.position.request.*;
+import okhttp3.MultipartBody;
 import com.bybit.api.client.domain.rfq.request.AcceptNonLpQuoteRequest;
 import com.bybit.api.client.domain.spot.leverageToken.SpotLeverageTokenRequest;
 import com.bybit.api.client.domain.spot.marginTrade.SpotMarginTradeBorrowRequest;
@@ -6602,6 +6602,7 @@ public interface BybitApiService {
      * @param limit false   Integer   Limit for data size per page
      * @param cursor false   String   Cursor for pagination
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/account/instruments-info")
     Call<Object> getAccountInstruments(@Query("category") String category,
                                        @Query("symbol") String symbol,
@@ -6613,6 +6614,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/query-dcp-info
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/account/query-dcp-info")
     Call<Object> getDcpInfo();
 
@@ -6623,6 +6625,7 @@ public interface BybitApiService {
      *
      * @param coinName true   String   Coin name
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/account/withdrawal")
     Call<Object> getTransferableAmount(@Query("coinName") String coinName);
 
@@ -6631,6 +6634,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/user-setting-config
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/account/user-setting-config")
     Call<Object> getUserSettings();
 
@@ -6639,6 +6643,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/borrow
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/account/borrow")
     Call<Object> manualBorrow(@Body ManualBorrowRequest manualBorrowRequest);
 
@@ -6647,6 +6652,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/repay
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/account/repay")
     Call<Object> manualRepay(@Body ManualRepayRequest manualRepayRequest);
 
@@ -6655,6 +6661,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/no-convert-repay
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/account/no-convert-repay")
     Call<Object> noConvertRepay(@Body NoConvertRepayRequest noConvertRepayRequest);
 
@@ -6663,6 +6670,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/quick-repayment
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/account/quick-repayment")
     Call<Object> oneClickRepay(@Body OneClickRepayRequest oneClickRepayRequest);
 
@@ -6671,6 +6679,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/account/set-limit-px-action
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/account/set-limit-px-action")
     Call<Object> setPriceLimit(@Body SetPriceLimitRequest setPriceLimitRequest);
 
@@ -6685,6 +6694,7 @@ public interface BybitApiService {
      * @param endDate false   String   End date
      * @param subAffId false   Long   Sub-affiliate ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/affiliate/affiliate-sub-list")
     Call<Object> getAffiliateSubList(@Query("cursor") String cursor,
                                      @Query("size") Integer size,
@@ -6702,8 +6712,9 @@ public interface BybitApiService {
      * @param limit false   Integer   Limit for data size per page
      * @param cursor false   String   Cursor. Used for pagination
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/asset/fundinghistory")
-    Call<Object> queryFundingDetailApi(@Query("createTimeFrom") String createTimeFrom,
+    Call<Object> queryFundingDetail(@Query("createTimeFrom") String createTimeFrom,
                                        @Query("createTimeTo") String createTimeTo,
                                        @Query("limit") Integer limit,
                                        @Query("cursor") String cursor);
@@ -6717,6 +6728,7 @@ public interface BybitApiService {
      * @param limit false   Integer   Limit for data size per page
      * @param cursor false   String   Cursor for pagination
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/broker/apilimit/query-all")
     Call<Object> queryBrokerAllUidDetails(@Query("uids") String uids,
                                           @Query("limit") Integer limit,
@@ -6727,6 +6739,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/broker/apilimit/query-cap
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/broker/apilimit/query-cap")
     Call<Object> queryBrokerCap();
 
@@ -6735,6 +6748,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/broker/apilimit/set
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/broker/apilimit/set")
     Call<Object> setBrokerApiLimit(@Body SetBrokerApiLimitRequest setBrokerApiLimitRequest);
 
@@ -6743,6 +6757,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/add-liquidity
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/liquidity-mining/add-liquidity")
     Call<Object> addLiquidity(@Body AddLiquidityRequest addLiquidityRequest);
 
@@ -6751,6 +6766,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/add-margin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/liquidity-mining/add-margin")
     Call<Object> addMargin(@Body AddMarginRequest addMarginRequest);
 
@@ -6759,6 +6775,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/claim-interest
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/liquidity-mining/claim-interest")
     Call<Object> claimLiquidityInterest(@Body ClaimLiquidityInterestRequest claimLiquidityInterestRequest);
 
@@ -6776,6 +6793,7 @@ public interface BybitApiService {
      * @param limit false Integer Page size
      * @param cursor false String Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/advance/order")
     Call<Object> getAdvanceEarnOrder(@Query("category") String category,
                                      @Query("productId") Long productId,
@@ -6797,6 +6815,7 @@ public interface BybitApiService {
      * @param limit false Integer Page size
      * @param cursor false String Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/advance/position")
     Call<Object> getAdvanceEarnPosition(@Query("category") String category,
                                         @Query("productId") Long productId,
@@ -6813,6 +6832,7 @@ public interface BybitApiService {
      * @param coin false String Coin name
      * @param duration false String Product duration
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/advance/product")
     Call<Object> getAdvanceEarnProduct(@Query("category") String category,
                                        @Query("coin") String coin,
@@ -6826,6 +6846,7 @@ public interface BybitApiService {
      * @param category true String Product category
      * @param productId false Long Product ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/advance/product-extra-info")
     Call<Object> getAdvanceEarnProductExtraInfo(@Query("category") String category,
                                                 @Query("productId") Long productId);
@@ -6840,6 +6861,7 @@ public interface BybitApiService {
      * @param lowerPrice true String Lower price bound
      * @param upperPrice true String Upper price bound
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/advance/double-win-leverage")
     Call<Object> getDoubleWinLeverage(@Query("productId") Long productId,
                                       @Query("initialPrice") String initialPrice,
@@ -6856,6 +6878,7 @@ public interface BybitApiService {
      * @param startTime true Long Start timestamp (ms)
      * @param endTime true Long End timestamp (ms)
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/apr-history")
     Call<Object> getEarnAprHistory(@Query("category") String category,
                                    @Query("productId") String productId,
@@ -6874,6 +6897,7 @@ public interface BybitApiService {
      * @param limit false Integer Page size
      * @param cursor false String Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/hourly-yield")
     Call<Object> getEarnHourlyYieldHistory(@Query("category") String category,
                                            @Query("productId") String productId,
@@ -6896,6 +6920,7 @@ public interface BybitApiService {
      * @param limit false Integer Page size
      * @param cursor false String Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/order")
     Call<Object> getEarnOrderHistory(@Query("category") String category,
                                      @Query("orderId") String orderId,
@@ -6915,6 +6940,7 @@ public interface BybitApiService {
      * @param productId false String Product ID
      * @param coin false String Coin name
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/position")
     Call<Object> getEarnPosition(@Query("category") String category,
                                  @Query("productId") String productId,
@@ -6928,6 +6954,7 @@ public interface BybitApiService {
      * @param category true String Product category
      * @param coin false String Coin name
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/product")
     Call<Object> getEarnProduct(@Query("category") String category,
                                 @Query("coin") String coin);
@@ -6944,6 +6971,7 @@ public interface BybitApiService {
      * @param limit false Integer Page size
      * @param cursor false String Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/yield")
     Call<Object> getEarnYieldHistory(@Query("category") String category,
                                      @Query("productId") Long productId,
@@ -6966,6 +6994,7 @@ public interface BybitApiService {
      * @param limit false Integer Limit for data size per page
      * @param cursor false String Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/fixed-term/order")
     Call<Object> getFixedTermOrder(@Query("orderType") String orderType,
                                    @Query("productId") String productId,
@@ -6985,6 +7014,7 @@ public interface BybitApiService {
      * @param category false String Product category
      * @param coin false String Coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/fixed-term/position")
     Call<Object> getFixedTermPosition(@Query("productId") String productId,
                                       @Query("category") String category,
@@ -6997,6 +7027,7 @@ public interface BybitApiService {
      *
      * @param coin false   String   Coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/fixed-term/product")
     Call<Object> getFixedTermProduct(@Query("coin") String coin);
 
@@ -7005,6 +7036,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/hold-to-earn/product
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/hold-to-earn/product")
     Call<Object> getHoldToEarnProduct();
 
@@ -7018,6 +7050,7 @@ public interface BybitApiService {
      * @param limit true   Integer   Records per page
      * @param cursor false   String   Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/hold-to-earn/yield-history")
     Call<Object> getHoldToEarnYieldHistory(@Query("timeStart") Long timeStart,
                                            @Query("timeEnd") Long timeEnd,
@@ -7036,6 +7069,7 @@ public interface BybitApiService {
      * @param limit false   Integer   Page size
      * @param cursor false   String   Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/liquidity-mining/liquidation-records")
     Call<Object> getLiquidityMiningLiquidationRecords(@Query("baseCoin") String baseCoin,
                                                       @Query("quoteCoin") String quoteCoin,
@@ -7059,6 +7093,7 @@ public interface BybitApiService {
      * @param limit false   Integer   Records per page
      * @param cursor false   String   Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/liquidity-mining/order")
     Call<Object> getLiquidityMiningOrders(@Query("orderId") String orderId,
                                           @Query("orderLinkId") String orderLinkId,
@@ -7078,6 +7113,7 @@ public interface BybitApiService {
      * @param productId false   String   Product ID
      * @param baseCoin false   String   Base coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/liquidity-mining/position")
     Call<Object> getLiquidityMiningPositions(@Query("productId") String productId,
                                              @Query("baseCoin") String baseCoin);
@@ -7090,6 +7126,7 @@ public interface BybitApiService {
      * @param baseCoin false   String   Base coin
      * @param quoteCoin false   String   Quote coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/liquidity-mining/product")
     Call<Object> getLiquidityMiningProducts(@Query("baseCoin") String baseCoin,
                                             @Query("quoteCoin") String quoteCoin);
@@ -7106,6 +7143,7 @@ public interface BybitApiService {
      * @param limit false   Integer   Records per page
      * @param cursor false   String   Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/liquidity-mining/yield-records")
     Call<Object> getLiquidityMiningYieldRecords(@Query("baseCoin") String baseCoin,
                                                 @Query("quoteCoin") String quoteCoin,
@@ -7123,6 +7161,7 @@ public interface BybitApiService {
      * @param startTime false   Long   Start time (ms)
      * @param endTime false   Long   End time (ms)
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/rwa/nav-chart")
     Call<Object> getRwaNavChart(@Query("productId") Long productId,
                                 @Query("startTime") Long startTime,
@@ -7142,6 +7181,7 @@ public interface BybitApiService {
      * @param limit false   Integer   Records per page
      * @param cursor false   String   Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/rwa/order")
     Call<Object> getRwaOrderList(@Query("orderId") String orderId,
                                  @Query("orderLinkId") String orderLinkId,
@@ -7157,6 +7197,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/rwa/position
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/rwa/position")
     Call<Object> getRwaPositionList();
 
@@ -7167,6 +7208,7 @@ public interface BybitApiService {
      *
      * @param coin false   String   Coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/rwa/product")
     Call<Object> getRwaProductList(@Query("coin") String coin);
 
@@ -7178,6 +7220,7 @@ public interface BybitApiService {
      * @param category true   String   Product category
      * @param positionIds true   String   Position IDs (comma separated)
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/advance/get-redeem-est-amount-list")
     Call<Object> getSmartLeverageRedeemEstAmountList(@Query("category") String category,
                                                      @Query("positionIds") String positionIds);
@@ -7193,6 +7236,7 @@ public interface BybitApiService {
      * @param cursor false   String   Pagination cursor
      * @param limit false   Integer   Limit for data size per page
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/token/yield")
     Call<Object> getTokenDailyYield(@Query("coin") String coin,
                                     @Query("startTime") Long startTime,
@@ -7208,6 +7252,7 @@ public interface BybitApiService {
      * @param coin true   String   Coin
      * @param range true   Long   Time range
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/token/history-apr")
     Call<Object> getTokenHistoricalApr(@Query("coin") String coin,
                                        @Query("range") Long range);
@@ -7223,6 +7268,7 @@ public interface BybitApiService {
      * @param cursor    false   String    Pagination cursor
      * @param limit     false   Integer   Limit for data size per page
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/token/hourly-yield")
     Call<Object> getTokenHourlyYield(@Query("coin") String coin,
                                      @Query("startTime") Long startTime,
@@ -7244,6 +7290,7 @@ public interface BybitApiService {
      * @param cursor       false   String    Pagination cursor
      * @param limit        false   Integer   Limit for data size per page
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/token/order")
     Call<Object> getTokenOrderList(@Query("coin") String coin,
                                    @Query("orderLinkId") String orderLinkId,
@@ -7261,6 +7308,7 @@ public interface BybitApiService {
      *
      * @param coin true    String    Coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/token/position")
     Call<Object> getTokenPosition(@Query("coin") String coin);
 
@@ -7271,6 +7319,7 @@ public interface BybitApiService {
      *
      * @param coin true    String    Coin
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/token/product")
     Call<Object> getTokenProduct(@Query("coin") String coin);
 
@@ -7281,6 +7330,7 @@ public interface BybitApiService {
      *
      * @param category true    String    Product category
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/coupons")
     Call<Object> listEarnCoupons(@Query("category") String category);
 
@@ -7289,6 +7339,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/position/modify
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/position/modify")
     Call<Object> modifyEarnPosition(@Body ModifyEarnPositionRequest modifyEarnPositionRequest);
 
@@ -7297,6 +7348,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/advance/place-order
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/advance/place-order")
     Call<Object> placeAdvanceEarnOrder(@Body PlaceAdvanceEarnOrderRequest placeAdvanceEarnOrderRequest);
 
@@ -7305,6 +7357,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/place-order
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/place-order")
     Call<Object> placeEarnOrder(@Body PlaceEarnOrderRequest placeEarnOrderRequest);
 
@@ -7313,6 +7366,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/place-order
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/fixed-term/place-order")
     Call<Object> placeFixedTermOrder(@Body PlaceFixedTermOrderRequest placeFixedTermOrderRequest);
 
@@ -7321,6 +7375,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/rwa/place-order
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/rwa/place-order")
     Call<Object> placeRwaOrder(@Body PlaceRwaOrderRequest placeRwaOrderRequest);
 
@@ -7329,6 +7384,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/token/place-order
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/token/place-order")
     Call<Object> placeTokenOrder(@Body PlaceTokenOrderRequest placeTokenOrderRequest);
 
@@ -7341,6 +7397,7 @@ public interface BybitApiService {
      * @param startTime false   Long      Start timestamp (ms)
      * @param endTime   false   Long      End timestamp (ms)
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/investment-plan/asset-trend")
     Call<Object> pwmAssetTrend(@Query("planId") String planId,
                                @Query("startTime") Long startTime,
@@ -7351,6 +7408,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/claim
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/investment-plan/claim")
     Call<Object> pwmClaim(@Body PwmClaimRequest pwmClaimRequest);
 
@@ -7359,6 +7417,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/customize-plan/create
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/customize-plan/create")
     Call<Object> pwmCreateCustomPlan(@Body PwmCreateCustomPlanRequest pwmCreateCustomPlanRequest);
 
@@ -7371,6 +7430,7 @@ public interface BybitApiService {
      * @param startTime false   Long      Start timestamp (ms)
      * @param endTime   false   Long      End timestamp (ms)
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/investment-plan/fund-nav")
     Call<Object> pwmFundNav(@Query("fundId") String fundId,
                             @Query("startTime") Long startTime,
@@ -7381,6 +7441,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/fund-transfer
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/fund-transfer")
     Call<Object> pwmFundTransfer(@Body PwmFundTransferRequest pwmFundTransferRequest);
 
@@ -7391,6 +7452,7 @@ public interface BybitApiService {
      *
      * @param planId true   String   Investment plan ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/investment-plan/new-plan")
     Call<Object> pwmGetNewPlanDetail(@Query("planId") String planId);
 
@@ -7401,6 +7463,7 @@ public interface BybitApiService {
      *
      * @param planId true   String   Investment plan ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/investment-plan/detail")
     Call<Object> pwmGetPlanDetail(@Query("planId") String planId);
 
@@ -7409,6 +7472,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/create-fund
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/asset-manager/create-fund")
     Call<Object> pwmInstCreateFund(@Body PwmInstCreateFundRequest pwmInstCreateFundRequest);
 
@@ -7417,6 +7481,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/create-investment-plan
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/asset-manager/create-investment-plan")
     Call<Object> pwmInstCreateInvestmentPlan(@Body PwmInstCreateInvestmentPlanRequest pwmInstCreateInvestmentPlanRequest);
 
@@ -7425,6 +7490,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/create-sub-account
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/asset-manager/create-sub-account")
     Call<Object> pwmInstCreateSubAccount(@Body PwmInstCreateSubAccountRequest pwmInstCreateSubAccountRequest);
 
@@ -7439,6 +7505,7 @@ public interface BybitApiService {
      * @param limit           false   Integer   Page size
      * @param cursor          false   String    Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/asset-manager/get-investment-plan")
     Call<Object> pwmInstGetInvestmentPlans(@Query("planId") String planId,
                                            @Query("status") String status,
@@ -7457,6 +7524,7 @@ public interface BybitApiService {
      * @param limit  false   Integer   Page size
      * @param cursor false   String    Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/asset-manager/all-funds")
     Call<Object> pwmInstListFunds(@Query("fundId") String fundId,
                                   @Query("coin") String coin,
@@ -7477,6 +7545,7 @@ public interface BybitApiService {
      * @param limit     false   Integer   Page size
      * @param cursor    false   String    Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/asset-manager/all-order")
     Call<Object> pwmInstListOrders(@Query("fundId") String fundId,
                                    @Query("orderType") String orderType,
@@ -7491,6 +7560,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/manage-investment-plan
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/asset-manager/manage-investment-plan")
     Call<Object> pwmInstManageInvestmentPlan(@Body PwmInstManageInvestmentPlanRequest pwmInstManageInvestmentPlanRequest);
 
@@ -7499,6 +7569,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/manage-order
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/asset-manager/manage-order")
     Call<Object> pwmInstManageOrder(@Body PwmInstManageOrderRequest pwmInstManageOrderRequest);
 
@@ -7507,6 +7578,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/settle-profit
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/asset-manager/settle-profit")
     Call<Object> pwmInstSettleProfit(@Body PwmInstSettleProfitRequest pwmInstSettleProfitRequest);
 
@@ -7515,6 +7587,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/invest-more
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/investment-plan/invest-more")
     Call<Object> pwmInvestMore(@Body PwmInvestMoreRequest pwmInvestMoreRequest);
 
@@ -7528,6 +7601,7 @@ public interface BybitApiService {
      * @param limit  false   Integer   Page size
      * @param cursor false   String    Pagination cursor
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/investment-plan/all")
     Call<Object> pwmListInvestmentPlans(@Query("planId") String planId,
                                         @Query("status") String status,
@@ -7549,6 +7623,7 @@ public interface BybitApiService {
      * @param cursor      false   String    Pagination cursor
      * @param orderLinkId false   String    Client order ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/investment-plan/order")
     Call<Object> pwmListOrder(@Query("planId") String planId,
                               @Query("category") String category,
@@ -7565,6 +7640,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/customize-plan/product
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/customize-plan/product")
     Call<Object> pwmListProductCards();
 
@@ -7576,6 +7652,7 @@ public interface BybitApiService {
      * @param transferId false   String   Client-side transfer ID
      * @param fromUserId false   Long   Source user ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/earn/pwm/query-fund-transfer-result")
     Call<Object> pwmQueryFundTransferResult(@Query("transferId") String transferId,
                                             @Query("fromUserId") Long fromUserId);
@@ -7585,6 +7662,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/redeem
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/investment-plan/redeem")
     Call<Object> pwmRedeem(@Body PwmRedeemRequest pwmRedeemRequest);
 
@@ -7593,6 +7671,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/subscribe
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/pwm/investment-plan/subscribe")
     Call<Object> pwmSubscribe(@Body PwmSubscribeRequest pwmSubscribeRequest);
 
@@ -7601,6 +7680,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/redeem
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/fixed-term/redeem")
     Call<Object> redeemFixedTerm(@Body RedeemFixedTermRequest redeemFixedTermRequest);
 
@@ -7609,6 +7689,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/reinvest
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/liquidity-mining/reinvest")
     Call<Object> reinvestLiquidity(@Body ReinvestLiquidityRequest reinvestLiquidityRequest);
 
@@ -7617,6 +7698,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/remove-liquidity
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/liquidity-mining/remove-liquidity")
     Call<Object> removeLiquidity(@Body RemoveLiquidityRequest removeLiquidityRequest);
 
@@ -7625,6 +7707,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/position/auto-invest
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/earn/fixed-term/position/auto-invest")
     Call<Object> setFixedTermAutoInvest(@Body SetFixedTermAutoInvestRequest setFixedTermAutoInvestRequest);
 
@@ -7633,6 +7716,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/fiat/quote-apply
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/fiat/quote-apply")
     Call<Object> applyQuote(@Body ApplyQuoteRequest applyQuoteRequest);
 
@@ -7641,8 +7725,9 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/fiat/trade-execute
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/fiat/trade-execute")
-    Call<Object> confirmQuotePost(@Body ConfirmQuoteV2Request confirmQuoteV2Request);
+    Call<Object> confirmQuote(@Body ConfirmQuoteV2Request confirmQuoteV2Request);
 
     /**
      * Get reference price for a fiat trading symbol.
@@ -7652,6 +7737,7 @@ public interface BybitApiService {
      * @param symbol true   String   Trading symbol
      * @param paymentMethod false   String   Payment method
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/fiat/reference-price")
     Call<Object> getReferencePrice(@Query("symbol") String symbol,
                                    @Query("paymentMethod") String paymentMethod);
@@ -7664,6 +7750,7 @@ public interface BybitApiService {
      * @param accountCategory false   String   Account category
      * @param currency false   String   Currency filter
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/fiat/balance-query")
     Call<Object> queryBalance(@Query("accountCategory") String accountCategory,
                               @Query("currency") String currency);
@@ -7675,6 +7762,7 @@ public interface BybitApiService {
      *
      * @param side false   Integer   Trading side filter
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/fiat/query-coin-list")
     Call<Object> queryCoinList(@Query("side") Integer side);
 
@@ -7686,6 +7774,7 @@ public interface BybitApiService {
      * @param tradeNo false   String   Trade number
      * @param merchantRequestId false   String   Merchant request ID
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/fiat/trade-query")
     Call<Object> queryTrade(@Query("tradeNo") String tradeNo,
                             @Query("merchantRequestId") String merchantRequestId);
@@ -7700,6 +7789,7 @@ public interface BybitApiService {
      * @param startTime false   String   Start time
      * @param endTime false   String   End time
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/fiat/query-trade-history")
     Call<Object> queryTradeHistory(@Query("index") Long index,
                                    @Query("limit") Integer limit,
@@ -7783,14 +7873,16 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/user/personal/info
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/user/personal/info")
-    Call<Object> getAccountInfoPost(@Body GetAccountInfoRequest getAccountInfoRequest);
+    Call<Object> getAccountInfo(@Body GetAccountInfoRequest getAccountInfoRequest);
 
     /**
      * Get Ads
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/item/online
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/item/online")
     Call<Object> getAds(@Body GetAdsRequest getAdsRequest);
 
@@ -7799,6 +7891,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/simplifyList
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/simplifyList")
     Call<Object> getAllOrders(@Body GetAllOrdersRequest getAllOrdersRequest);
 
@@ -7807,6 +7900,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/message/listpage
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/message/listpage")
     Call<Object> getChatMessages(@Body GetChatMessagesRequest getChatMessagesRequest);
 
@@ -7815,6 +7909,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/user/order/personal/info
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/user/order/personal/info")
     Call<Object> getCounterpartyUserInfo(@Body GetCounterpartyUserInfoRequest getCounterpartyUserInfoRequest);
 
@@ -7823,6 +7918,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/item/info
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/item/info")
     Call<Object> getMyAdDetails(@Body GetMyAdDetailsRequest getMyAdDetailsRequest);
 
@@ -7831,6 +7927,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/item/personal/list
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/item/personal/list")
     Call<Object> getMyAds(@Body GetMyAdsRequest getMyAdsRequest);
 
@@ -7839,6 +7936,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/info
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/info")
     Call<Object> getOrderDetail(@Body GetOrderDetailRequest getOrderDetailRequest);
 
@@ -7847,6 +7945,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/pending/simplifyList
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/pending/simplifyList")
     Call<Object> getPendingOrders(@Body GetPendingOrdersRequest getPendingOrdersRequest);
 
@@ -7855,6 +7954,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/user/payment/list
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/user/payment/list")
     Call<Object> getUserPayment(@Body GetUserPaymentRequest getUserPaymentRequest);
 
@@ -7863,6 +7963,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/pay
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/pay")
     Call<Object> markOrderAsPaid(@Body MarkOrderAsPaidRequest markOrderAsPaidRequest);
 
@@ -7871,6 +7972,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/item/create
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/item/create")
     Call<Object> postAd(@Body PostAdRequest postAdRequest);
 
@@ -7879,6 +7981,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/finish
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/finish")
     Call<Object> releaseAssets(@Body ReleaseAssetsRequest releaseAssetsRequest);
 
@@ -7887,6 +7990,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/item/cancel
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/item/cancel")
     Call<Object> removeAd(@Body RemoveAdRequest removeAdRequest);
 
@@ -7895,6 +7999,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/order/message/send
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/order/message/send")
     Call<Object> sendChatMessage(@Body SendChatMessageRequest sendChatMessageRequest);
 
@@ -7903,6 +8008,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/item/update
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/p2p/item/update")
     Call<Object> updateAd(@Body UpdateAdRequest updateAdRequest);
 
@@ -7910,15 +8016,21 @@ public interface BybitApiService {
      * Upload Chat File
      * <p>
      * https://bybit-exchange.github.io/docs/v5/p2p/oss/upload_file
+     * <p>
+     * Bybit requires this endpoint to be multipart/form-data with a part named
+     * "upload_file" (snake_case). Supported types: jpg, png, jpeg, pdf, mp4.
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @Multipart
     @POST("/v5/p2p/oss/upload_file")
-    Call<Object> uploadChatFile(@Body UploadChatFileRequest uploadChatFileRequest);
+    Call<Object> uploadChatFile(@Part MultipartBody.Part uploadFile);
 
     /**
      * Accept Non-LP Quote
      * <p>
      * https://bybit-exchange.github.io/docs/v5/rfq/accept-other-quote
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/rfq/accept-other-quote")
     Call<Object> acceptNonLpQuote(@Body AcceptNonLpQuoteRequest acceptNonLpQuoteRequest);
 
@@ -7929,6 +8041,7 @@ public interface BybitApiService {
      *
      * @param currency false   String   Currency
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/spot-margin-trade/position-tiers")
     Call<Object> getPositionTiers(@Query("currency") String currency);
 
@@ -7939,6 +8052,7 @@ public interface BybitApiService {
      *
      * @param currency false   String   Currency
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/spot-margin-trade/collateral")
     Call<Object> getTieredCollateralRatio(@Query("currency") String currency);
 
@@ -7947,6 +8061,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/order/pre-check
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/order/pre-check")
     Call<Object> preCheckOrder(@Body PreCheckOrderRequest preCheckOrderRequest);
 
@@ -7955,6 +8070,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/user/del-submember
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/user/del-submember")
     Call<Object> deleteSubMemberV5(@Body DeleteSubMemberV5Request deleteSubMemberV5Request);
 
@@ -7966,6 +8082,7 @@ public interface BybitApiService {
      * @param nextCursor false   Long   Next cursor for pagination
      * @param pageSize false   Integer   Page size
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/user/escrow_sub_members")
     Call<Object> queryEscrowSubMembersV5(@Query("nextCursor") Long nextCursor,
                                          @Query("pageSize") Integer pageSize);
@@ -7979,6 +8096,7 @@ public interface BybitApiService {
      * @param size false   Integer   Page size
      * @param status false   String   Referral status (array, pass as comma-separated string)
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/user/invitation/referrals")
     Call<Object> queryReferrals(@Query("cursor") String cursor,
                                 @Query("size") Integer size,
@@ -7989,6 +8107,7 @@ public interface BybitApiService {
      * <p>
      * https://bybit-exchange.github.io/docs/v5/user/agreement
      */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/v5/user/agreement")
     Call<Object> signAgreement(@Body SignAgreementRequest signAgreementRequest);
 }

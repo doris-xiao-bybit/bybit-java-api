@@ -21,8 +21,8 @@ public class BybitApiAsyncFiatRestClientImpl implements BybitApiAsyncFiatRestCli
     }
 
     @Override
-    public void confirmQuotePost(ConfirmQuoteV2Request confirmQuoteV2Request, BybitApiCallback<Object> callback) {
-        bybitApiService.confirmQuotePost(confirmQuoteV2Request).enqueue(new BybitApiCallbackAdapter<>(callback));
+    public void confirmQuote(ConfirmQuoteV2Request confirmQuoteV2Request, BybitApiCallback<Object> callback) {
+        bybitApiService.confirmQuote(confirmQuoteV2Request).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 
     @Override

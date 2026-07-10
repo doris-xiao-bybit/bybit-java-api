@@ -30,9 +30,19 @@ public interface BybitApiSpotMarginRestClient {
     Object setNormalSpotToggleMarginTrade(SpotMarginDataRequest spotMarginDataRequest);
     Object loanNormalSpotMarginTrade(SpotMarginDataRequest spotMarginDataRequest);
     Object repayNormalSpotMarginTrade(SpotMarginDataRequest spotMarginDataRequest);
-    Object getNormalSpotMarginTradeBorrowOrders(SpotMarginDataRequest spotMarginDataRequest);
-    Object getNormalSpotMarginTradeRepayOrders(SpotMarginDataRequest spotMarginDataRequest);
-    Object getSpotMarginInterestRateHistory(SpotMarginDataRequest spotMarginDataRequest);
-    Object getPositionTiers(String currency);
-    Object getTieredCollateralRatio(String currency);
+    default Object getNormalSpotMarginTradeBorrowOrders(SpotMarginDataRequest spotMarginDataRequest) {
+        throw new UnsupportedOperationException("getNormalSpotMarginTradeBorrowOrders is not implemented by this client");
+    }
+    default Object getNormalSpotMarginTradeRepayOrders(SpotMarginDataRequest spotMarginDataRequest) {
+        throw new UnsupportedOperationException("getNormalSpotMarginTradeRepayOrders is not implemented by this client");
+    }
+    default Object getSpotMarginInterestRateHistory(SpotMarginDataRequest spotMarginDataRequest) {
+        throw new UnsupportedOperationException("getSpotMarginInterestRateHistory is not implemented by this client");
+    }
+    default Object getPositionTiers(String currency) {
+        throw new UnsupportedOperationException("getPositionTiers is not implemented by this client");
+    }
+    default Object getTieredCollateralRatio(String currency) {
+        throw new UnsupportedOperationException("getTieredCollateralRatio is not implemented by this client");
+    }
 }

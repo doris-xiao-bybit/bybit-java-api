@@ -18,7 +18,7 @@ import com.bybit.api.client.domain.p2p.request.ReleaseAssetsRequest;
 import com.bybit.api.client.domain.p2p.request.RemoveAdRequest;
 import com.bybit.api.client.domain.p2p.request.SendChatMessageRequest;
 import com.bybit.api.client.domain.p2p.request.UpdateAdRequest;
-import com.bybit.api.client.domain.p2p.request.UploadChatFileRequest;
+import okhttp3.MultipartBody;
 
 import static com.bybit.api.client.service.BybitApiServiceGenerator.createService;
 import static com.bybit.api.client.service.BybitApiServiceGenerator.executeSync;
@@ -31,8 +31,8 @@ public class BybitApiP2pRestClientImpl implements BybitApiP2pRestClient {
     }
 
     @Override
-    public Object getAccountInfoPost(GetAccountInfoRequest getAccountInfoRequest) {
-        return executeSync(bybitApiService.getAccountInfoPost(getAccountInfoRequest));
+    public Object getAccountInfo(GetAccountInfoRequest getAccountInfoRequest) {
+        return executeSync(bybitApiService.getAccountInfo(getAccountInfoRequest));
     }
 
     @Override
@@ -111,7 +111,7 @@ public class BybitApiP2pRestClientImpl implements BybitApiP2pRestClient {
     }
 
     @Override
-    public Object uploadChatFile(UploadChatFileRequest uploadChatFileRequest) {
-        return executeSync(bybitApiService.uploadChatFile(uploadChatFileRequest));
+    public Object uploadChatFile(MultipartBody.Part uploadFile) {
+        return executeSync(bybitApiService.uploadChatFile(uploadFile));
     }
 }

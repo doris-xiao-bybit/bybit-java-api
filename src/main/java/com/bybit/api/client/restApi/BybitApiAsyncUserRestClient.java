@@ -34,8 +34,16 @@ public interface BybitApiAsyncUserRestClient {
     void getSubUIDListUnlimited(BybitApiCallback<Object> callback);
     void getSubAccAllAPIKeyInfo(UserDataRequest subUserRequest, BybitApiCallback<Object> callback);
 
-    void deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request, BybitApiCallback<Object> callback);
-    void queryEscrowSubMembersV5(Long nextCursor, Integer pageSize, BybitApiCallback<Object> callback);
-    void queryReferrals(String cursor, Integer size, String status, BybitApiCallback<Object> callback);
-    void signAgreement(SignAgreementRequest signAgreementRequest, BybitApiCallback<Object> callback);
+    default void deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("deleteSubMemberV5 is not implemented by this client");
+    }
+    default void queryEscrowSubMembersV5(Long nextCursor, Integer pageSize, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryEscrowSubMembersV5 is not implemented by this client");
+    }
+    default void queryReferrals(String cursor, Integer size, String status, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryReferrals is not implemented by this client");
+    }
+    default void signAgreement(SignAgreementRequest signAgreementRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("signAgreement is not implemented by this client");
+    }
 }

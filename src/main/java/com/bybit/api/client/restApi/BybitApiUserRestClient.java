@@ -31,8 +31,16 @@ public interface BybitApiUserRestClient {
     Object getSubUIDListUnlimited();
     Object getSubAccAllAPIKeyInfo(UserDataRequest subUserRequest);
 
-    Object deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request);
-    Object queryEscrowSubMembersV5(Long nextCursor, Integer pageSize);
-    Object queryReferrals(String cursor, Integer size, String status);
-    Object signAgreement(SignAgreementRequest signAgreementRequest);
+    default Object deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request) {
+        throw new UnsupportedOperationException("deleteSubMemberV5 is not implemented by this client");
+    }
+    default Object queryEscrowSubMembersV5(Long nextCursor, Integer pageSize) {
+        throw new UnsupportedOperationException("queryEscrowSubMembersV5 is not implemented by this client");
+    }
+    default Object queryReferrals(String cursor, Integer size, String status) {
+        throw new UnsupportedOperationException("queryReferrals is not implemented by this client");
+    }
+    default Object signAgreement(SignAgreementRequest signAgreementRequest) {
+        throw new UnsupportedOperationException("signAgreement is not implemented by this client");
+    }
 }

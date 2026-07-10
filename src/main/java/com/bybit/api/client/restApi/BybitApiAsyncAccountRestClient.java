@@ -27,21 +27,39 @@ public interface BybitApiAsyncAccountRestClient {
     void getAccountSMPGroup(BybitApiCallback<Object> callback);
     void setAccountSpotHedging(AccountDataRequest request, BybitApiCallback<Object> callback);
 
-    void getAccountInstruments(String category, String symbol, Integer limit, String cursor, BybitApiCallback<Object> callback);
+    default void getAccountInstruments(String category, String symbol, Integer limit, String cursor, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getAccountInstruments is not implemented by this client");
+    }
 
-    void getDcpInfo(BybitApiCallback<Object> callback);
+    default void getDcpInfo(BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getDcpInfo is not implemented by this client");
+    }
 
-    void getTransferableAmount(String coinName, BybitApiCallback<Object> callback);
+    default void getTransferableAmount(String coinName, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getTransferableAmount is not implemented by this client");
+    }
 
-    void getUserSettings(BybitApiCallback<Object> callback);
+    default void getUserSettings(BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("getUserSettings is not implemented by this client");
+    }
 
-    void manualBorrow(ManualBorrowRequest manualBorrowRequest, BybitApiCallback<Object> callback);
+    default void manualBorrow(ManualBorrowRequest manualBorrowRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("manualBorrow is not implemented by this client");
+    }
 
-    void manualRepay(ManualRepayRequest manualRepayRequest, BybitApiCallback<Object> callback);
+    default void manualRepay(ManualRepayRequest manualRepayRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("manualRepay is not implemented by this client");
+    }
 
-    void noConvertRepay(NoConvertRepayRequest noConvertRepayRequest, BybitApiCallback<Object> callback);
+    default void noConvertRepay(NoConvertRepayRequest noConvertRepayRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("noConvertRepay is not implemented by this client");
+    }
 
-    void oneClickRepay(OneClickRepayRequest oneClickRepayRequest, BybitApiCallback<Object> callback);
+    default void oneClickRepay(OneClickRepayRequest oneClickRepayRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("oneClickRepay is not implemented by this client");
+    }
 
-    void setPriceLimit(SetPriceLimitRequest setPriceLimitRequest, BybitApiCallback<Object> callback);
+    default void setPriceLimit(SetPriceLimitRequest setPriceLimitRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("setPriceLimit is not implemented by this client");
+    }
 }

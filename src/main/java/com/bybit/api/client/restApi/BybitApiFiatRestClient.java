@@ -7,7 +7,7 @@ public interface BybitApiFiatRestClient {
 
     Object applyQuote(ApplyQuoteRequest applyQuoteRequest);
 
-    Object confirmQuotePost(ConfirmQuoteV2Request confirmQuoteV2Request);
+    Object confirmQuote(ConfirmQuoteV2Request confirmQuoteV2Request);
 
     Object getReferencePrice(String symbol, String paymentMethod);
 

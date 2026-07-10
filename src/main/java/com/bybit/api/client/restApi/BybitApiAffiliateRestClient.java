@@ -6,5 +6,7 @@ public interface BybitApiAffiliateRestClient {
 
     Object getAffiliateUserList(AffiliateDataRequest request);
 
-    Object getAffiliateSubList(String cursor, Integer size, String startDate, String endDate, Long subAffId);
+    default Object getAffiliateSubList(String cursor, Integer size, String startDate, String endDate, Long subAffId) {
+        throw new UnsupportedOperationException("getAffiliateSubList is not implemented by this client");
+    }
 }

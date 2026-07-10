@@ -33,5 +33,7 @@ public interface BybitApiRfqRestClient {
     Object getRfqTradeHistory(RfqDataRequest request);
     Object getRfqPublicTrades(RfqDataRequest request);
 
-    Object acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest);
+    default Object acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest) {
+        throw new UnsupportedOperationException("acceptNonLpQuote is not implemented by this client");
+    }
 }

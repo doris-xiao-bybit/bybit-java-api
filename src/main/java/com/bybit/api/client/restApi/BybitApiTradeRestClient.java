@@ -31,5 +31,7 @@ public interface BybitApiTradeRestClient {
     Object cancelOrder(TradeOrderRequest order);
     Object cancelAllOrder(TradeOrderRequest order);
     Object amendOrder(TradeOrderRequest order);
-    Object preCheckOrder(PreCheckOrderRequest preCheckOrderRequest);
+    default Object preCheckOrder(PreCheckOrderRequest preCheckOrderRequest) {
+        throw new UnsupportedOperationException("preCheckOrder is not implemented by this client");
+    }
 }

@@ -33,5 +33,7 @@ public interface BybitApiAsyncRfqRestClient {
     void getRfqTradeHistory(RfqDataRequest request, BybitApiCallback<Object> callback);
     void getRfqPublicTrades(RfqDataRequest request, BybitApiCallback<Object> callback);
 
-    void acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest, BybitApiCallback<Object> callback);
+    default void acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("acceptNonLpQuote is not implemented by this client");
+    }
 }

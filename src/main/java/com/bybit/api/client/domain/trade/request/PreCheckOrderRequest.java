@@ -29,4 +29,11 @@ public class PreCheckOrderRequest {
     private String tpOrderType;
     private String slOrderType;
     private String orderIv;
+    private String triggerPrice;
+    private String triggerBy;
+    private Integer triggerDirection;
+    private String marketUnit;
+    private String smpType;
+    private Boolean mmp;
+    private Boolean closeOnTrigger;
 }

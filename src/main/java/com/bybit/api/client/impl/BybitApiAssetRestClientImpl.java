@@ -277,7 +277,7 @@ public class BybitApiAssetRestClientImpl implements BybitApiAssetRestClient {
     }
 
     @Override
-    public Object queryFundingDetailApi(String createTimeFrom, String createTimeTo, Integer limit, String cursor) {
-        return executeSync(bybitApiService.queryFundingDetailApi(createTimeFrom, createTimeTo, limit, cursor));
+    public Object queryFundingDetail(String createTimeFrom, String createTimeTo, Integer limit, String cursor) {
+        return executeSync(bybitApiService.queryFundingDetail(createTimeFrom, createTimeTo, limit, cursor));
     }
 }

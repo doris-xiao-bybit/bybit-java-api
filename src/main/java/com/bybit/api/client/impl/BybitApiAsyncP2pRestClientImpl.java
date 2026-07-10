@@ -19,7 +19,7 @@ import com.bybit.api.client.domain.p2p.request.ReleaseAssetsRequest;
 import com.bybit.api.client.domain.p2p.request.RemoveAdRequest;
 import com.bybit.api.client.domain.p2p.request.SendChatMessageRequest;
 import com.bybit.api.client.domain.p2p.request.UpdateAdRequest;
-import com.bybit.api.client.domain.p2p.request.UploadChatFileRequest;
+import okhttp3.MultipartBody;
 
 import static com.bybit.api.client.service.BybitApiServiceGenerator.createService;
 
@@ -31,8 +31,8 @@ public class BybitApiAsyncP2pRestClientImpl implements BybitApiAsyncP2pRestClien
     }
 
     @Override
-    public void getAccountInfoPost(GetAccountInfoRequest getAccountInfoRequest, BybitApiCallback<Object> callback) {
-        bybitApiService.getAccountInfoPost(getAccountInfoRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    public void getAccountInfo(GetAccountInfoRequest getAccountInfoRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.getAccountInfo(getAccountInfoRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 
     @Override
@@ -111,7 +111,7 @@ public class BybitApiAsyncP2pRestClientImpl implements BybitApiAsyncP2pRestClien
     }
 
     @Override
-    public void uploadChatFile(UploadChatFileRequest uploadChatFileRequest, BybitApiCallback<Object> callback) {
-        bybitApiService.uploadChatFile(uploadChatFileRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    public void uploadChatFile(MultipartBody.Part uploadFile, BybitApiCallback<Object> callback) {
+        bybitApiService.uploadChatFile(uploadFile).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 }

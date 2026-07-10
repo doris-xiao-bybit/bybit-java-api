@@ -13,9 +13,15 @@ public interface BybitApiAsyncBrokerRestClient {
     void issueVoucher(BrokerDataRequest brokerDataRequest, BybitApiCallback<Object> callback);
     void getIssuedVoucher(BrokerDataRequest brokerDataRequest, BybitApiCallback<Object> callback);
 
-    void queryBrokerAllUidDetails(String uids, Integer limit, String cursor, BybitApiCallback<Object> callback);
+    default void queryBrokerAllUidDetails(String uids, Integer limit, String cursor, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryBrokerAllUidDetails is not implemented by this client");
+    }
 
-    void queryBrokerCap(BybitApiCallback<Object> callback);
+    default void queryBrokerCap(BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryBrokerCap is not implemented by this client");
+    }
 
-    void setBrokerApiLimit(SetBrokerApiLimitRequest setBrokerApiLimitRequest, BybitApiCallback<Object> callback);
+    default void setBrokerApiLimit(SetBrokerApiLimitRequest setBrokerApiLimitRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("setBrokerApiLimit is not implemented by this client");
+    }
 }

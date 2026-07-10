@@ -21,8 +21,8 @@ public class BybitApiFiatRestClientImpl implements BybitApiFiatRestClient {
     }
 
     @Override
-    public Object confirmQuotePost(ConfirmQuoteV2Request confirmQuoteV2Request) {
-        return executeSync(bybitApiService.confirmQuotePost(confirmQuoteV2Request));
+    public Object confirmQuote(ConfirmQuoteV2Request confirmQuoteV2Request) {
+        return executeSync(bybitApiService.confirmQuote(confirmQuoteV2Request));
     }
 
     @Override

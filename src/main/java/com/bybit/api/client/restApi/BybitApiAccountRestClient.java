@@ -27,21 +27,39 @@ public interface BybitApiAccountRestClient {
     Object getAccountMMPState(AccountDataRequest request);
     Object getAccountSMPGroup();
 
-    Object getAccountInstruments(String category, String symbol, Integer limit, String cursor);
+    default Object getAccountInstruments(String category, String symbol, Integer limit, String cursor) {
+        throw new UnsupportedOperationException("getAccountInstruments is not implemented by this client");
+    }
 
-    Object getDcpInfo();
+    default Object getDcpInfo() {
+        throw new UnsupportedOperationException("getDcpInfo is not implemented by this client");
+    }
 
-    Object getTransferableAmount(String coinName);
+    default Object getTransferableAmount(String coinName) {
+        throw new UnsupportedOperationException("getTransferableAmount is not implemented by this client");
+    }
 
-    Object getUserSettings();
+    default Object getUserSettings() {
+        throw new UnsupportedOperationException("getUserSettings is not implemented by this client");
+    }
 
-    Object manualBorrow(ManualBorrowRequest manualBorrowRequest);
+    default Object manualBorrow(ManualBorrowRequest manualBorrowRequest) {
+        throw new UnsupportedOperationException("manualBorrow is not implemented by this client");
+    }
 
-    Object manualRepay(ManualRepayRequest manualRepayRequest);
+    default Object manualRepay(ManualRepayRequest manualRepayRequest) {
+        throw new UnsupportedOperationException("manualRepay is not implemented by this client");
+    }
 
-    Object noConvertRepay(NoConvertRepayRequest noConvertRepayRequest);
+    default Object noConvertRepay(NoConvertRepayRequest noConvertRepayRequest) {
+        throw new UnsupportedOperationException("noConvertRepay is not implemented by this client");
+    }
 
-    Object oneClickRepay(OneClickRepayRequest oneClickRepayRequest);
+    default Object oneClickRepay(OneClickRepayRequest oneClickRepayRequest) {
+        throw new UnsupportedOperationException("oneClickRepay is not implemented by this client");
+    }
 
-    Object setPriceLimit(SetPriceLimitRequest setPriceLimitRequest);
+    default Object setPriceLimit(SetPriceLimitRequest setPriceLimitRequest) {
+        throw new UnsupportedOperationException("setPriceLimit is not implemented by this client");
+    }
 }

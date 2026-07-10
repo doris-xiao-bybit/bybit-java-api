@@ -31,5 +31,7 @@ public interface BybitApiAsyncTradeRestClient {
     void cancelOrder(TradeOrderRequest order, BybitApiCallback<Object> callback);
     void cancelAllOrder(TradeOrderRequest order, BybitApiCallback<Object> callback);
     void amendOrder(TradeOrderRequest order, BybitApiCallback<Object> callback);
-    void preCheckOrder(PreCheckOrderRequest preCheckOrderRequest, BybitApiCallback<Object> callback);
+    default void preCheckOrder(PreCheckOrderRequest preCheckOrderRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("preCheckOrder is not implemented by this client");
+    }
 }

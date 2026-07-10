@@ -12,7 +12,13 @@ public interface BybitApiBrokerRestClient {
     Object getVoucherSpec(BrokerDataRequest brokerDataRequest);
     Object issueVoucher(BrokerDataRequest brokerDataRequest);
     Object getIssuedVoucher(BrokerDataRequest brokerDataRequest);
-    Object queryBrokerAllUidDetails(String uids, Integer limit, String cursor);
-    Object queryBrokerCap();
-    Object setBrokerApiLimit(SetBrokerApiLimitRequest setBrokerApiLimitRequest);
+    default Object queryBrokerAllUidDetails(String uids, Integer limit, String cursor) {
+        throw new UnsupportedOperationException("queryBrokerAllUidDetails is not implemented by this client");
+    }
+    default Object queryBrokerCap() {
+        throw new UnsupportedOperationException("queryBrokerCap is not implemented by this client");
+    }
+    default Object setBrokerApiLimit(SetBrokerApiLimitRequest setBrokerApiLimitRequest) {
+        throw new UnsupportedOperationException("setBrokerApiLimit is not implemented by this client");
+    }
 }
