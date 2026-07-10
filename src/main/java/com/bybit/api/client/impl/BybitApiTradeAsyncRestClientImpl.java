@@ -1,6 +1,7 @@
 package com.bybit.api.client.impl;
 
 import com.bybit.api.client.domain.trade.request.BatchOrderRequest;
+import com.bybit.api.client.domain.trade.request.PreCheckOrderRequest;
 import com.bybit.api.client.restApi.BybitApiAsyncTradeRestClient;
 import com.bybit.api.client.restApi.BybitApiCallback;
 import com.bybit.api.client.restApi.BybitApiService;
@@ -181,5 +182,10 @@ public class BybitApiTradeAsyncRestClientImpl implements BybitApiAsyncTradeRestC
     public void amendOrder(TradeOrderRequest order, BybitApiCallback<Object> callback) {
         var amendOrderRequest = converter.convertTradeToAmendOrderRequest(order);
         bybitApiService.amendOrder(amendOrderRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void preCheckOrder(PreCheckOrderRequest preCheckOrderRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.preCheckOrder(preCheckOrderRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 }

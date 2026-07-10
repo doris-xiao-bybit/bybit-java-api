@@ -6,20 +6,68 @@ import com.bybit.api.client.domain.asset.request.*;
 import com.bybit.api.client.domain.broker.request.BrokerGetIssuedVoucherRequest;
 import com.bybit.api.client.domain.broker.request.BrokerIssueVoucherRequest;
 import com.bybit.api.client.domain.broker.request.BrokerVoucherSpecRequest;
+import com.bybit.api.client.domain.broker.request.SetBrokerApiLimitRequest;
+import com.bybit.api.client.domain.earn.request.AddLiquidityRequest;
+import com.bybit.api.client.domain.earn.request.AddMarginRequest;
+import com.bybit.api.client.domain.earn.request.ClaimLiquidityInterestRequest;
+import com.bybit.api.client.domain.earn.request.ModifyEarnPositionRequest;
+import com.bybit.api.client.domain.earn.request.PlaceAdvanceEarnOrderRequest;
+import com.bybit.api.client.domain.earn.request.PlaceEarnOrderRequest;
+import com.bybit.api.client.domain.earn.request.PlaceFixedTermOrderRequest;
+import com.bybit.api.client.domain.earn.request.PlaceRwaOrderRequest;
+import com.bybit.api.client.domain.earn.request.PlaceTokenOrderRequest;
+import com.bybit.api.client.domain.earn.request.PwmClaimRequest;
+import com.bybit.api.client.domain.earn.request.PwmCreateCustomPlanRequest;
+import com.bybit.api.client.domain.earn.request.PwmFundTransferRequest;
+import com.bybit.api.client.domain.earn.request.PwmInstCreateFundRequest;
+import com.bybit.api.client.domain.earn.request.PwmInstCreateInvestmentPlanRequest;
+import com.bybit.api.client.domain.earn.request.PwmInstCreateSubAccountRequest;
+import com.bybit.api.client.domain.earn.request.PwmInstManageInvestmentPlanRequest;
+import com.bybit.api.client.domain.earn.request.PwmInstManageOrderRequest;
+import com.bybit.api.client.domain.earn.request.PwmInstSettleProfitRequest;
+import com.bybit.api.client.domain.earn.request.PwmInvestMoreRequest;
+import com.bybit.api.client.domain.earn.request.PwmRedeemRequest;
+import com.bybit.api.client.domain.earn.request.PwmSubscribeRequest;
+import com.bybit.api.client.domain.earn.request.RedeemFixedTermRequest;
+import com.bybit.api.client.domain.earn.request.ReinvestLiquidityRequest;
+import com.bybit.api.client.domain.earn.request.RemoveLiquidityRequest;
+import com.bybit.api.client.domain.earn.request.SetFixedTermAutoInvestRequest;
+import com.bybit.api.client.domain.fiat.request.ApplyQuoteRequest;
+import com.bybit.api.client.domain.fiat.request.ConfirmQuoteV2Request;
 import com.bybit.api.client.domain.institution.clientLending.ClientLendingFundsRequest;
 import com.bybit.api.client.domain.institution.insLending.UpdateInstitutionLoadUidRequest;
 import com.bybit.api.client.domain.loan.request.CryptoLoanAdjustLtvRequest;
 import com.bybit.api.client.domain.loan.request.CryptoLoanBorrowRequest;
 import com.bybit.api.client.domain.loan.request.CryptoLoanRepayRequest;
+import com.bybit.api.client.domain.p2p.request.GetAccountInfoRequest;
+import com.bybit.api.client.domain.p2p.request.GetAdsRequest;
+import com.bybit.api.client.domain.p2p.request.GetAllOrdersRequest;
+import com.bybit.api.client.domain.p2p.request.GetChatMessagesRequest;
+import com.bybit.api.client.domain.p2p.request.GetCounterpartyUserInfoRequest;
+import com.bybit.api.client.domain.p2p.request.GetMyAdDetailsRequest;
+import com.bybit.api.client.domain.p2p.request.GetMyAdsRequest;
+import com.bybit.api.client.domain.p2p.request.GetOrderDetailRequest;
+import com.bybit.api.client.domain.p2p.request.GetPendingOrdersRequest;
+import com.bybit.api.client.domain.p2p.request.GetUserPaymentRequest;
+import com.bybit.api.client.domain.p2p.request.MarkOrderAsPaidRequest;
+import com.bybit.api.client.domain.p2p.request.PostAdRequest;
+import com.bybit.api.client.domain.p2p.request.ReleaseAssetsRequest;
+import com.bybit.api.client.domain.p2p.request.RemoveAdRequest;
+import com.bybit.api.client.domain.p2p.request.SendChatMessageRequest;
+import com.bybit.api.client.domain.p2p.request.UpdateAdRequest;
 import com.bybit.api.client.domain.position.request.*;
+import okhttp3.MultipartBody;
+import com.bybit.api.client.domain.rfq.request.AcceptNonLpQuoteRequest;
 import com.bybit.api.client.domain.spot.leverageToken.SpotLeverageTokenRequest;
 import com.bybit.api.client.domain.spot.marginTrade.SpotMarginTradeBorrowRequest;
 import com.bybit.api.client.domain.spot.marginTrade.SpotMarginTradeRePayRequest;
 import com.bybit.api.client.domain.trade.OrderStatus;
 import com.bybit.api.client.domain.trade.request.*;
 import com.bybit.api.client.domain.user.request.CreateSubApiKeyRequest;
+import com.bybit.api.client.domain.user.request.DeleteSubMemberV5Request;
 import com.bybit.api.client.domain.user.request.FreezeSubUIDRquest;
 import com.bybit.api.client.domain.user.request.ModifyApiKeyRequest;
+import com.bybit.api.client.domain.user.request.SignAgreementRequest;
 import com.bybit.api.client.domain.user.request.UserSubMemberRequest;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -6543,4 +6591,1523 @@ public interface BybitApiService {
             @Query("limit") Integer limit,
             @Query("cursor") String cursor
     );
+
+    /**
+     * Get Account Instruments
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/instruments-info
+     *
+     * @param category true   String   Product type
+     * @param symbol false   String   Symbol name
+     * @param limit false   Integer   Limit for data size per page
+     * @param cursor false   String   Cursor for pagination
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/account/instruments-info")
+    Call<Object> getAccountInstruments(@Query("category") String category,
+                                       @Query("symbol") String symbol,
+                                       @Query("limit") Integer limit,
+                                       @Query("cursor") String cursor);
+
+    /**
+     * Get DCP Info
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/query-dcp-info
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/account/query-dcp-info")
+    Call<Object> getDcpInfo();
+
+    /**
+     * Get Transferable Amount
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/withdrawal
+     *
+     * @param coinName true   String   Coin name
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/account/withdrawal")
+    Call<Object> getTransferableAmount(@Query("coinName") String coinName);
+
+    /**
+     * Get User Settings
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/user-setting-config
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/account/user-setting-config")
+    Call<Object> getUserSettings();
+
+    /**
+     * Manual Borrow
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/borrow
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/account/borrow")
+    Call<Object> manualBorrow(@Body ManualBorrowRequest manualBorrowRequest);
+
+    /**
+     * Manual Repay
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/repay
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/account/repay")
+    Call<Object> manualRepay(@Body ManualRepayRequest manualRepayRequest);
+
+    /**
+     * No-Convert Repay
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/no-convert-repay
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/account/no-convert-repay")
+    Call<Object> noConvertRepay(@Body NoConvertRepayRequest noConvertRepayRequest);
+
+    /**
+     * One-Click Repay
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/quick-repayment
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/account/quick-repayment")
+    Call<Object> oneClickRepay(@Body OneClickRepayRequest oneClickRepayRequest);
+
+    /**
+     * Set Price Limit
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/account/set-limit-px-action
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/account/set-limit-px-action")
+    Call<Object> setPriceLimit(@Body SetPriceLimitRequest setPriceLimitRequest);
+
+    /**
+     * Get affiliate sub-affiliate list
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/affiliate/affiliate-sub-list
+     *
+     * @param cursor false   String   Cursor for pagination
+     * @param size false   Integer   Page size
+     * @param startDate false   String   Start date
+     * @param endDate false   String   End date
+     * @param subAffId false   Long   Sub-affiliate ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/affiliate/affiliate-sub-list")
+    Call<Object> getAffiliateSubList(@Query("cursor") String cursor,
+                                     @Query("size") Integer size,
+                                     @Query("startDate") String startDate,
+                                     @Query("endDate") String endDate,
+                                     @Query("subAffId") Long subAffId);
+
+    /**
+     * Get Funding History
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/asset/fundinghistory
+     *
+     * @param createTimeFrom false   String   The start timestamp (ms)
+     * @param createTimeTo false   String   The end timestamp (ms)
+     * @param limit false   Integer   Limit for data size per page
+     * @param cursor false   String   Cursor. Used for pagination
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/asset/fundinghistory")
+    Call<Object> queryFundingDetail(@Query("createTimeFrom") String createTimeFrom,
+                                       @Query("createTimeTo") String createTimeTo,
+                                       @Query("limit") Integer limit,
+                                       @Query("cursor") String cursor);
+
+    /**
+     * Query Broker All UID Rate Limits
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/broker/apilimit/query-all
+     *
+     * @param uids false   String   UIDs to query
+     * @param limit false   Integer   Limit for data size per page
+     * @param cursor false   String   Cursor for pagination
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/broker/apilimit/query-all")
+    Call<Object> queryBrokerAllUidDetails(@Query("uids") String uids,
+                                          @Query("limit") Integer limit,
+                                          @Query("cursor") String cursor);
+
+    /**
+     * Query Broker Rate Limit Cap
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/broker/apilimit/query-cap
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/broker/apilimit/query-cap")
+    Call<Object> queryBrokerCap();
+
+    /**
+     * Set Broker API Rate Limit
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/broker/apilimit/set
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/broker/apilimit/set")
+    Call<Object> setBrokerApiLimit(@Body SetBrokerApiLimitRequest setBrokerApiLimitRequest);
+
+    /**
+     * Add liquidity to a liquidity mining product
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/add-liquidity
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/liquidity-mining/add-liquidity")
+    Call<Object> addLiquidity(@Body AddLiquidityRequest addLiquidityRequest);
+
+    /**
+     * Add margin to a liquidity mining position
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/add-margin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/liquidity-mining/add-margin")
+    Call<Object> addMargin(@Body AddMarginRequest addMarginRequest);
+
+    /**
+     * Claim interest from a liquidity mining product
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/claim-interest
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/liquidity-mining/claim-interest")
+    Call<Object> claimLiquidityInterest(@Body ClaimLiquidityInterestRequest claimLiquidityInterestRequest);
+
+    /**
+     * Get advance earn orders
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/order
+     *
+     * @param category true String Product category
+     * @param productId false Long Product ID
+     * @param orderId false String Order ID
+     * @param orderLinkId false String Client order link ID
+     * @param startTime false Long Start timestamp (ms)
+     * @param endTime false Long End timestamp (ms)
+     * @param limit false Integer Page size
+     * @param cursor false String Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/advance/order")
+    Call<Object> getAdvanceEarnOrder(@Query("category") String category,
+                                     @Query("productId") Long productId,
+                                     @Query("orderId") String orderId,
+                                     @Query("orderLinkId") String orderLinkId,
+                                     @Query("startTime") Long startTime,
+                                     @Query("endTime") Long endTime,
+                                     @Query("limit") Integer limit,
+                                     @Query("cursor") String cursor);
+
+    /**
+     * Get advance earn positions
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/position
+     *
+     * @param category true String Product category
+     * @param productId false Long Product ID
+     * @param coin false String Coin name
+     * @param limit false Integer Page size
+     * @param cursor false String Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/advance/position")
+    Call<Object> getAdvanceEarnPosition(@Query("category") String category,
+                                        @Query("productId") Long productId,
+                                        @Query("coin") String coin,
+                                        @Query("limit") Integer limit,
+                                        @Query("cursor") String cursor);
+
+    /**
+     * Get advance earn product info
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/product
+     *
+     * @param category true String Product category
+     * @param coin false String Coin name
+     * @param duration false String Product duration
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/advance/product")
+    Call<Object> getAdvanceEarnProduct(@Query("category") String category,
+                                       @Query("coin") String coin,
+                                       @Query("duration") String duration);
+
+    /**
+     * Get advance earn product extra info
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/product-extra-info
+     *
+     * @param category true String Product category
+     * @param productId false Long Product ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/advance/product-extra-info")
+    Call<Object> getAdvanceEarnProductExtraInfo(@Query("category") String category,
+                                                @Query("productId") Long productId);
+
+    /**
+     * Get double win leverage
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/double-win-leverage
+     *
+     * @param productId true Long Product ID
+     * @param initialPrice true String Initial price
+     * @param lowerPrice true String Lower price bound
+     * @param upperPrice true String Upper price bound
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/advance/double-win-leverage")
+    Call<Object> getDoubleWinLeverage(@Query("productId") Long productId,
+                                      @Query("initialPrice") String initialPrice,
+                                      @Query("lowerPrice") String lowerPrice,
+                                      @Query("upperPrice") String upperPrice);
+
+    /**
+     * Get earn APR history
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/apr-history
+     *
+     * @param category true String Product category
+     * @param productId true String Product ID
+     * @param startTime true Long Start timestamp (ms)
+     * @param endTime true Long End timestamp (ms)
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/apr-history")
+    Call<Object> getEarnAprHistory(@Query("category") String category,
+                                   @Query("productId") String productId,
+                                   @Query("startTime") Long startTime,
+                                   @Query("endTime") Long endTime);
+
+    /**
+     * Get earn hourly yield history
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/hourly-yield
+     *
+     * @param category true String Product category
+     * @param productId false String Product ID
+     * @param startTime false Long Start timestamp (ms)
+     * @param endTime false Long End timestamp (ms)
+     * @param limit false Integer Page size
+     * @param cursor false String Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/hourly-yield")
+    Call<Object> getEarnHourlyYieldHistory(@Query("category") String category,
+                                           @Query("productId") String productId,
+                                           @Query("startTime") Long startTime,
+                                           @Query("endTime") Long endTime,
+                                           @Query("limit") Integer limit,
+                                           @Query("cursor") String cursor);
+
+    /**
+     * Get stake or redeem order history
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/order
+     *
+     * @param category true String Product category
+     * @param orderId false String Order ID
+     * @param orderLinkId false String Client order link ID
+     * @param productId false String Product ID
+     * @param startTime false Long Start timestamp (ms)
+     * @param endTime false Long End timestamp (ms)
+     * @param limit false Integer Page size
+     * @param cursor false String Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/order")
+    Call<Object> getEarnOrderHistory(@Query("category") String category,
+                                     @Query("orderId") String orderId,
+                                     @Query("orderLinkId") String orderLinkId,
+                                     @Query("productId") String productId,
+                                     @Query("startTime") Long startTime,
+                                     @Query("endTime") Long endTime,
+                                     @Query("limit") Integer limit,
+                                     @Query("cursor") String cursor);
+
+    /**
+     * Get staked earn positions
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/position
+     *
+     * @param category true String Product category
+     * @param productId false String Product ID
+     * @param coin false String Coin name
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/position")
+    Call<Object> getEarnPosition(@Query("category") String category,
+                                 @Query("productId") String productId,
+                                 @Query("coin") String coin);
+
+    /**
+     * Get earn product info
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/product
+     *
+     * @param category true String Product category
+     * @param coin false String Coin name
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/product")
+    Call<Object> getEarnProduct(@Query("category") String category,
+                                @Query("coin") String coin);
+
+    /**
+     * Get earn yield history
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/yield
+     *
+     * @param category true String Product category
+     * @param productId false Long Product ID
+     * @param startTime false Long Start timestamp (ms)
+     * @param endTime false Long End timestamp (ms)
+     * @param limit false Integer Page size
+     * @param cursor false String Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/yield")
+    Call<Object> getEarnYieldHistory(@Query("category") String category,
+                                     @Query("productId") Long productId,
+                                     @Query("startTime") Long startTime,
+                                     @Query("endTime") Long endTime,
+                                     @Query("limit") Integer limit,
+                                     @Query("cursor") String cursor);
+
+    /**
+     * Get Fixed Term Order History
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/order
+     *
+     * @param orderType false String Order type
+     * @param productId false String Product id
+     * @param category false String Product category
+     * @param orderId false String Order id
+     * @param startTime false Long Start time (ms)
+     * @param endTime false Long End time (ms)
+     * @param limit false Integer Limit for data size per page
+     * @param cursor false String Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/fixed-term/order")
+    Call<Object> getFixedTermOrder(@Query("orderType") String orderType,
+                                   @Query("productId") String productId,
+                                   @Query("category") String category,
+                                   @Query("orderId") String orderId,
+                                   @Query("startTime") Long startTime,
+                                   @Query("endTime") Long endTime,
+                                   @Query("limit") Integer limit,
+                                   @Query("cursor") String cursor);
+
+    /**
+     * Get Fixed Term Position
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/position
+     *
+     * @param productId false String Product id
+     * @param category false String Product category
+     * @param coin false String Coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/fixed-term/position")
+    Call<Object> getFixedTermPosition(@Query("productId") String productId,
+                                      @Query("category") String category,
+                                      @Query("coin") String coin);
+
+    /**
+     * Get Fixed Term Product List
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/product
+     *
+     * @param coin false   String   Coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/fixed-term/product")
+    Call<Object> getFixedTermProduct(@Query("coin") String coin);
+
+    /**
+     * Get hold-to-earn product list
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/hold-to-earn/product
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/hold-to-earn/product")
+    Call<Object> getHoldToEarnProduct();
+
+    /**
+     * Get hold-to-earn yield history
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/hold-to-earn/yield-history
+     *
+     * @param timeStart false   Long   Start time (ms)
+     * @param timeEnd false   Long   End time (ms)
+     * @param limit true   Integer   Records per page
+     * @param cursor false   String   Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/hold-to-earn/yield-history")
+    Call<Object> getHoldToEarnYieldHistory(@Query("timeStart") Long timeStart,
+                                           @Query("timeEnd") Long timeEnd,
+                                           @Query("limit") Integer limit,
+                                           @Query("cursor") String cursor);
+
+    /**
+     * Get liquidity mining liquidation records
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/liquidation-records
+     *
+     * @param baseCoin false   String   Base coin
+     * @param quoteCoin false   String   Quote coin
+     * @param startTime false   Long   Start timestamp (ms)
+     * @param endTime false   Long   End timestamp (ms)
+     * @param limit false   Integer   Page size
+     * @param cursor false   String   Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/liquidity-mining/liquidation-records")
+    Call<Object> getLiquidityMiningLiquidationRecords(@Query("baseCoin") String baseCoin,
+                                                      @Query("quoteCoin") String quoteCoin,
+                                                      @Query("startTime") Long startTime,
+                                                      @Query("endTime") Long endTime,
+                                                      @Query("limit") Integer limit,
+                                                      @Query("cursor") String cursor);
+
+    /**
+     * Get liquidity mining order history
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/order
+     *
+     * @param orderId false   String   Order ID
+     * @param orderLinkId false   String   User customised order ID
+     * @param productId false   String   Product ID
+     * @param orderType false   String   Order type
+     * @param status false   String   Order status
+     * @param startTime false   Long   Start time (ms)
+     * @param endTime false   Long   End time (ms)
+     * @param limit false   Integer   Records per page
+     * @param cursor false   String   Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/liquidity-mining/order")
+    Call<Object> getLiquidityMiningOrders(@Query("orderId") String orderId,
+                                          @Query("orderLinkId") String orderLinkId,
+                                          @Query("productId") String productId,
+                                          @Query("orderType") String orderType,
+                                          @Query("status") String status,
+                                          @Query("startTime") Long startTime,
+                                          @Query("endTime") Long endTime,
+                                          @Query("limit") Integer limit,
+                                          @Query("cursor") String cursor);
+
+    /**
+     * Get active liquidity mining positions
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/position
+     *
+     * @param productId false   String   Product ID
+     * @param baseCoin false   String   Base coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/liquidity-mining/position")
+    Call<Object> getLiquidityMiningPositions(@Query("productId") String productId,
+                                             @Query("baseCoin") String baseCoin);
+
+    /**
+     * Get liquidity mining product list
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/product
+     *
+     * @param baseCoin false   String   Base coin
+     * @param quoteCoin false   String   Quote coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/liquidity-mining/product")
+    Call<Object> getLiquidityMiningProducts(@Query("baseCoin") String baseCoin,
+                                            @Query("quoteCoin") String quoteCoin);
+
+    /**
+     * Get liquidity mining yield claim records
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/yield-records
+     *
+     * @param baseCoin false   String   Base coin
+     * @param quoteCoin false   String   Quote coin
+     * @param startTime false   Long   Start time (ms)
+     * @param endTime false   Long   End time (ms)
+     * @param limit false   Integer   Records per page
+     * @param cursor false   String   Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/liquidity-mining/yield-records")
+    Call<Object> getLiquidityMiningYieldRecords(@Query("baseCoin") String baseCoin,
+                                                @Query("quoteCoin") String quoteCoin,
+                                                @Query("startTime") Long startTime,
+                                                @Query("endTime") Long endTime,
+                                                @Query("limit") Integer limit,
+                                                @Query("cursor") String cursor);
+
+    /**
+     * Get RWA NAV chart
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/rwa/nav-chart
+     *
+     * @param productId true   Long   Product ID
+     * @param startTime false   Long   Start time (ms)
+     * @param endTime false   Long   End time (ms)
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/rwa/nav-chart")
+    Call<Object> getRwaNavChart(@Query("productId") Long productId,
+                                @Query("startTime") Long startTime,
+                                @Query("endTime") Long endTime);
+
+    /**
+     * Get RWA order list
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/rwa/order
+     *
+     * @param orderId false   String   Order ID
+     * @param orderLinkId false   String   User customised order ID
+     * @param orderType false   String   Order type
+     * @param productId false   Long   Product ID
+     * @param startTime false   Long   Start time (ms)
+     * @param endTime false   Long   End time (ms)
+     * @param limit false   Integer   Records per page
+     * @param cursor false   String   Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/rwa/order")
+    Call<Object> getRwaOrderList(@Query("orderId") String orderId,
+                                 @Query("orderLinkId") String orderLinkId,
+                                 @Query("orderType") String orderType,
+                                 @Query("productId") Long productId,
+                                 @Query("startTime") Long startTime,
+                                 @Query("endTime") Long endTime,
+                                 @Query("limit") Integer limit,
+                                 @Query("cursor") String cursor);
+
+    /**
+     * Get RWA position list
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/rwa/position
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/rwa/position")
+    Call<Object> getRwaPositionList();
+
+    /**
+     * Get Product List
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/rwa/product
+     *
+     * @param coin false   String   Coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/rwa/product")
+    Call<Object> getRwaProductList(@Query("coin") String coin);
+
+    /**
+     * Get smart leverage redeem estimation amount list
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/get-redeem-est-amount-list
+     *
+     * @param category true   String   Product category
+     * @param positionIds true   String   Position IDs (comma separated)
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/advance/get-redeem-est-amount-list")
+    Call<Object> getSmartLeverageRedeemEstAmountList(@Query("category") String category,
+                                                     @Query("positionIds") String positionIds);
+
+    /**
+     * Get Daily Yield
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/yield
+     *
+     * @param coin true   String   Coin
+     * @param startTime false   Long   Start time (ms)
+     * @param endTime false   Long   End time (ms)
+     * @param cursor false   String   Pagination cursor
+     * @param limit false   Integer   Limit for data size per page
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/token/yield")
+    Call<Object> getTokenDailyYield(@Query("coin") String coin,
+                                    @Query("startTime") Long startTime,
+                                    @Query("endTime") Long endTime,
+                                    @Query("cursor") String cursor,
+                                    @Query("limit") Integer limit);
+
+    /**
+     * Get Historical APR
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/history-apr
+     *
+     * @param coin true   String   Coin
+     * @param range true   Long   Time range
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/token/history-apr")
+    Call<Object> getTokenHistoricalApr(@Query("coin") String coin,
+                                       @Query("range") Long range);
+
+    /**
+     * Get Hourly Yield
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/hourly-yield
+     *
+     * @param coin      true    String    Coin
+     * @param startTime false   Long      Start time (ms)
+     * @param endTime   false   Long      End time (ms)
+     * @param cursor    false   String    Pagination cursor
+     * @param limit     false   Integer   Limit for data size per page
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/token/hourly-yield")
+    Call<Object> getTokenHourlyYield(@Query("coin") String coin,
+                                     @Query("startTime") Long startTime,
+                                     @Query("endTime") Long endTime,
+                                     @Query("cursor") String cursor,
+                                     @Query("limit") Integer limit);
+
+    /**
+     * Get Order List
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/order
+     *
+     * @param coin         true    String    Coin
+     * @param orderLinkId  false   String    Client order id
+     * @param orderId      false   String    Order id
+     * @param orderType    false   String    Order type
+     * @param startTime    false   Long      Start time (ms)
+     * @param endTime      false   Long      End time (ms)
+     * @param cursor       false   String    Pagination cursor
+     * @param limit        false   Integer   Limit for data size per page
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/token/order")
+    Call<Object> getTokenOrderList(@Query("coin") String coin,
+                                   @Query("orderLinkId") String orderLinkId,
+                                   @Query("orderId") String orderId,
+                                   @Query("orderType") String orderType,
+                                   @Query("startTime") Long startTime,
+                                   @Query("endTime") Long endTime,
+                                   @Query("cursor") String cursor,
+                                   @Query("limit") Integer limit);
+
+    /**
+     * Get Position
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/position
+     *
+     * @param coin true    String    Coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/token/position")
+    Call<Object> getTokenPosition(@Query("coin") String coin);
+
+    /**
+     * Get Product Info
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/product
+     *
+     * @param coin true    String    Coin
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/token/product")
+    Call<Object> getTokenProduct(@Query("coin") String coin);
+
+    /**
+     * List Coupons
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/coupons
+     *
+     * @param category true    String    Product category
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/coupons")
+    Call<Object> listEarnCoupons(@Query("category") String category);
+
+    /**
+     * Modify an earn position
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/position/modify
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/position/modify")
+    Call<Object> modifyEarnPosition(@Body ModifyEarnPositionRequest modifyEarnPositionRequest);
+
+    /**
+     * Place an advance earn order
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/advance/place-order
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/advance/place-order")
+    Call<Object> placeAdvanceEarnOrder(@Body PlaceAdvanceEarnOrderRequest placeAdvanceEarnOrderRequest);
+
+    /**
+     * Stake or redeem an earn order
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/place-order
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/place-order")
+    Call<Object> placeEarnOrder(@Body PlaceEarnOrderRequest placeEarnOrderRequest);
+
+    /**
+     * Place Fixed Term Order
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/place-order
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/fixed-term/place-order")
+    Call<Object> placeFixedTermOrder(@Body PlaceFixedTermOrderRequest placeFixedTermOrderRequest);
+
+    /**
+     * Place Order (Stake / Redeem) for RWA
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/rwa/place-order
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/rwa/place-order")
+    Call<Object> placeRwaOrder(@Body PlaceRwaOrderRequest placeRwaOrderRequest);
+
+    /**
+     * Place Order (Mint/Redeem)
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/token/place-order
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/token/place-order")
+    Call<Object> placeTokenOrder(@Body PlaceTokenOrderRequest placeTokenOrderRequest);
+
+    /**
+     * Get Plan Asset Trend
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/asset-trend
+     *
+     * @param planId    true    String    Plan ID
+     * @param startTime false   Long      Start timestamp (ms)
+     * @param endTime   false   Long      End timestamp (ms)
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/investment-plan/asset-trend")
+    Call<Object> pwmAssetTrend(@Query("planId") String planId,
+                               @Query("startTime") Long startTime,
+                               @Query("endTime") Long endTime);
+
+    /**
+     * Claim Available Funds
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/claim
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/investment-plan/claim")
+    Call<Object> pwmClaim(@Body PwmClaimRequest pwmClaimRequest);
+
+    /**
+     * Create Custom Investment Plan (Direct Mode)
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/customize-plan/create
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/customize-plan/create")
+    Call<Object> pwmCreateCustomPlan(@Body PwmCreateCustomPlanRequest pwmCreateCustomPlanRequest);
+
+    /**
+     * Get Fund Historical NAV
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/fund-nav
+     *
+     * @param fundId    true    String    Fund ID
+     * @param startTime false   Long      Start timestamp (ms)
+     * @param endTime   false   Long      End timestamp (ms)
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/investment-plan/fund-nav")
+    Call<Object> pwmFundNav(@Query("fundId") String fundId,
+                            @Query("startTime") Long startTime,
+                            @Query("endTime") Long endTime);
+
+    /**
+     * Transfer funds between custody sub-accounts
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/fund-transfer
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/fund-transfer")
+    Call<Object> pwmFundTransfer(@Body PwmFundTransferRequest pwmFundTransferRequest);
+
+    /**
+     * Get pending-subscription plan detail
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/new-plan
+     *
+     * @param planId true   String   Investment plan ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/investment-plan/new-plan")
+    Call<Object> pwmGetNewPlanDetail(@Query("planId") String planId);
+
+    /**
+     * Get plan detail (active/closed)
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/detail
+     *
+     * @param planId true   String   Investment plan ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/investment-plan/detail")
+    Call<Object> pwmGetPlanDetail(@Query("planId") String planId);
+
+    /**
+     * Create pending-subscription fund
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/create-fund
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/asset-manager/create-fund")
+    Call<Object> pwmInstCreateFund(@Body PwmInstCreateFundRequest pwmInstCreateFundRequest);
+
+    /**
+     * Create investment plan for client
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/create-investment-plan
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/asset-manager/create-investment-plan")
+    Call<Object> pwmInstCreateInvestmentPlan(@Body PwmInstCreateInvestmentPlanRequest pwmInstCreateInvestmentPlanRequest);
+
+    /**
+     * Create fund sub-account
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/create-sub-account
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/asset-manager/create-sub-account")
+    Call<Object> pwmInstCreateSubAccount(@Body PwmInstCreateSubAccountRequest pwmInstCreateSubAccountRequest);
+
+    /**
+     * Query institution's investment plans
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/get-investment-plan
+     *
+     * @param planId          false   String    Investment plan ID
+     * @param status          false   String    Plan status
+     * @param subscriptionUid false   String    Subscription UID
+     * @param limit           false   Integer   Page size
+     * @param cursor          false   String    Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/asset-manager/get-investment-plan")
+    Call<Object> pwmInstGetInvestmentPlans(@Query("planId") String planId,
+                                           @Query("status") String status,
+                                           @Query("subscriptionUid") String subscriptionUid,
+                                           @Query("limit") Integer limit,
+                                           @Query("cursor") String cursor);
+
+    /**
+     * Query institution's managed funds
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/all-funds
+     *
+     * @param fundId false   String    Fund ID
+     * @param coin   false   String    Coin
+     * @param status false   String    Fund status
+     * @param limit  false   Integer   Page size
+     * @param cursor false   String    Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/asset-manager/all-funds")
+    Call<Object> pwmInstListFunds(@Query("fundId") String fundId,
+                                  @Query("coin") String coin,
+                                  @Query("status") String status,
+                                  @Query("limit") Integer limit,
+                                  @Query("cursor") String cursor);
+
+    /**
+     * Query fund subscription/redemption orders
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/all-order
+     *
+     * @param fundId    false   String    Fund ID
+     * @param orderType false   String    Order type (subscription/redemption)
+     * @param status    false   String    Order status
+     * @param startTime false   Long      Start timestamp (ms)
+     * @param endTime   false   Long      End timestamp (ms)
+     * @param limit     false   Integer   Page size
+     * @param cursor    false   String    Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/asset-manager/all-order")
+    Call<Object> pwmInstListOrders(@Query("fundId") String fundId,
+                                   @Query("orderType") String orderType,
+                                   @Query("status") String status,
+                                   @Query("startTime") Long startTime,
+                                   @Query("endTime") Long endTime,
+                                   @Query("limit") Integer limit,
+                                   @Query("cursor") String cursor);
+
+    /**
+     * Update investment plan status and funds
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/manage-investment-plan
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/asset-manager/manage-investment-plan")
+    Call<Object> pwmInstManageInvestmentPlan(@Body PwmInstManageInvestmentPlanRequest pwmInstManageInvestmentPlanRequest);
+
+    /**
+     * Approve or reject fund order
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/manage-order
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/asset-manager/manage-order")
+    Call<Object> pwmInstManageOrder(@Body PwmInstManageOrderRequest pwmInstManageOrderRequest);
+
+    /**
+     * Execute profit settlement
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/asset-manager/settle-profit
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/asset-manager/settle-profit")
+    Call<Object> pwmInstSettleProfit(@Body PwmInstSettleProfitRequest pwmInstSettleProfitRequest);
+
+    /**
+     * Invest More in an Active Plan
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/invest-more
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/investment-plan/invest-more")
+    Call<Object> pwmInvestMore(@Body PwmInvestMoreRequest pwmInvestMoreRequest);
+
+    /**
+     * List investment plans
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/all
+     *
+     * @param planId false   String    Investment plan ID
+     * @param status false   String    Plan status
+     * @param limit  false   Integer   Page size
+     * @param cursor false   String    Pagination cursor
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/investment-plan/all")
+    Call<Object> pwmListInvestmentPlans(@Query("planId") String planId,
+                                        @Query("status") String status,
+                                        @Query("limit") Integer limit,
+                                        @Query("cursor") String cursor);
+
+    /**
+     * List Investment Plan Orders
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/order
+     *
+     * @param planId      false   String    Plan ID
+     * @param category    false   String    Product category
+     * @param type        false   String    Order type
+     * @param status      false   String    Order status
+     * @param startTime   false   Long      Start timestamp (ms)
+     * @param endTime     false   Long      End timestamp (ms)
+     * @param limit       false   Integer   Page limit
+     * @param cursor      false   String    Pagination cursor
+     * @param orderLinkId false   String    Client order ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/investment-plan/order")
+    Call<Object> pwmListOrder(@Query("planId") String planId,
+                              @Query("category") String category,
+                              @Query("type") String type,
+                              @Query("status") String status,
+                              @Query("startTime") Long startTime,
+                              @Query("endTime") Long endTime,
+                              @Query("limit") Integer limit,
+                              @Query("cursor") String cursor,
+                              @Query("orderLinkId") String orderLinkId);
+
+    /**
+     * List Available Product Cards (Direct Mode)
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/customize-plan/product
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/customize-plan/product")
+    Call<Object> pwmListProductCards();
+
+    /**
+     * Query fund transfer records
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/query-fund-transfer-result
+     *
+     * @param transferId false   String   Client-side transfer ID
+     * @param fromUserId false   Long   Source user ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/earn/pwm/query-fund-transfer-result")
+    Call<Object> pwmQueryFundTransferResult(@Query("transferId") String transferId,
+                                            @Query("fromUserId") Long fromUserId);
+
+    /**
+     * Redeem from an Investment Plan
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/redeem
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/investment-plan/redeem")
+    Call<Object> pwmRedeem(@Body PwmRedeemRequest pwmRedeemRequest);
+
+    /**
+     * One-Click Subscribe to Pending Plan
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/pwm/investment-plan/subscribe
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/pwm/investment-plan/subscribe")
+    Call<Object> pwmSubscribe(@Body PwmSubscribeRequest pwmSubscribeRequest);
+
+    /**
+     * Redeem Fixed Term Position
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/redeem
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/fixed-term/redeem")
+    Call<Object> redeemFixedTerm(@Body RedeemFixedTermRequest redeemFixedTermRequest);
+
+    /**
+     * Reinvest interest into a liquidity mining position
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/reinvest
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/liquidity-mining/reinvest")
+    Call<Object> reinvestLiquidity(@Body ReinvestLiquidityRequest reinvestLiquidityRequest);
+
+    /**
+     * Remove liquidity from a liquidity mining product
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/liquidity-mining/remove-liquidity
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/liquidity-mining/remove-liquidity")
+    Call<Object> removeLiquidity(@Body RemoveLiquidityRequest removeLiquidityRequest);
+
+    /**
+     * Set Auto-Invest
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/earn/fixed-term/position/auto-invest
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/earn/fixed-term/position/auto-invest")
+    Call<Object> setFixedTermAutoInvest(@Body SetFixedTermAutoInvestRequest setFixedTermAutoInvestRequest);
+
+    /**
+     * Request a fiat quote for a trade.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/quote-apply
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/fiat/quote-apply")
+    Call<Object> applyQuote(@Body ApplyQuoteRequest applyQuoteRequest);
+
+    /**
+     * Confirm a quote and execute the fiat trade.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/trade-execute
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/fiat/trade-execute")
+    Call<Object> confirmQuote(@Body ConfirmQuoteV2Request confirmQuoteV2Request);
+
+    /**
+     * Get reference price for a fiat trading symbol.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/reference-price
+     *
+     * @param symbol true   String   Trading symbol
+     * @param paymentMethod false   String   Payment method
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/fiat/reference-price")
+    Call<Object> getReferencePrice(@Query("symbol") String symbol,
+                                   @Query("paymentMethod") String paymentMethod);
+
+    /**
+     * Query fiat account balance.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/balance-query
+     *
+     * @param accountCategory false   String   Account category
+     * @param currency false   String   Currency filter
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/fiat/balance-query")
+    Call<Object> queryBalance(@Query("accountCategory") String accountCategory,
+                              @Query("currency") String currency);
+
+    /**
+     * Get fiat trading pairs available for the account.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/query-coin-list
+     *
+     * @param side false   Integer   Trading side filter
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/fiat/query-coin-list")
+    Call<Object> queryCoinList(@Query("side") Integer side);
+
+    /**
+     * Query fiat trade status.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/trade-query
+     *
+     * @param tradeNo false   String   Trade number
+     * @param merchantRequestId false   String   Merchant request ID
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/fiat/trade-query")
+    Call<Object> queryTrade(@Query("tradeNo") String tradeNo,
+                            @Query("merchantRequestId") String merchantRequestId);
+
+    /**
+     * Query fiat trade history.
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/fiat/query-trade-history
+     *
+     * @param index false   Long   Pagination index
+     * @param limit false   Integer   Number of records per page
+     * @param startTime false   String   Start time
+     * @param endTime false   String   End time
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/fiat/query-trade-history")
+    Call<Object> queryTradeHistory(@Query("index") Long index,
+                                   @Query("limit") Integer limit,
+                                   @Query("startTime") String startTime,
+                                   @Query("endTime") String endTime);
+
+    /**
+     * Get ADL Alert
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/market/adlAlert
+     *
+     * @param symbol false   String   Symbol name
+     */
+    @GET("/v5/market/adlAlert")
+    Call<Object> getAdlAlert(@Query("symbol") String symbol);
+
+    /**
+     * Get Fee Group Structure
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/market/fee-group-info
+     *
+     * @param productType true   String   Product type
+     * @param groupId false   String   Group id
+     */
+    @GET("/v5/market/fee-group-info")
+    Call<Object> getFeeGroupInfo(@Query("productType") String productType,
+                                 @Query("groupId") String groupId);
+
+    /**
+     * Get Index Price Components
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/market/index-price-components
+     *
+     * @param indexName true   String   Index name
+     */
+    @GET("/v5/market/index-price-components")
+    Call<Object> getIndexPriceComponents(@Query("indexName") String indexName);
+
+    /**
+     * Get New Delivery Price
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/market/new-delivery-price
+     *
+     * @param category true   String   Product type
+     * @param baseCoin true   String   Base coin
+     * @param settleCoin false   String   Settle coin
+     */
+    @GET("/v5/market/new-delivery-price")
+    Call<Object> getNewDeliveryPrice(@Query("category") String category,
+                                     @Query("baseCoin") String baseCoin,
+                                     @Query("settleCoin") String settleCoin);
+
+    /**
+     * Get Order Price Limit
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/market/price-limit
+     *
+     * @param category false   String   Product type
+     * @param symbol true   String   Symbol name
+     */
+    @GET("/v5/market/price-limit")
+    Call<Object> getOrderPriceLimit(@Query("category") String category,
+                                    @Query("symbol") String symbol);
+
+    /**
+     * Get RPI Orderbook
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/market/rpi_orderbook
+     *
+     * @param category false   String   Product type
+     * @param symbol true   String   Symbol name
+     * @param limit true   Integer   Limit for data size per page
+     */
+    @GET("/v5/market/rpi_orderbook")
+    Call<Object> getRpiOrderbook(@Query("category") String category,
+                                 @Query("symbol") String symbol,
+                                 @Query("limit") Integer limit);
+
+    /**
+     * Get Account Information
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/user/personal/info
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/user/personal/info")
+    Call<Object> getAccountInfo(@Body GetAccountInfoRequest getAccountInfoRequest);
+
+    /**
+     * Get Ads
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/item/online
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/item/online")
+    Call<Object> getAds(@Body GetAdsRequest getAdsRequest);
+
+    /**
+     * Get All Orders
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/simplifyList
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/simplifyList")
+    Call<Object> getAllOrders(@Body GetAllOrdersRequest getAllOrdersRequest);
+
+    /**
+     * Get Chat Message
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/message/listpage
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/message/listpage")
+    Call<Object> getChatMessages(@Body GetChatMessagesRequest getChatMessagesRequest);
+
+    /**
+     * Get Counterparty User Info
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/user/order/personal/info
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/user/order/personal/info")
+    Call<Object> getCounterpartyUserInfo(@Body GetCounterpartyUserInfoRequest getCounterpartyUserInfoRequest);
+
+    /**
+     * Get My Ad Details
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/item/info
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/item/info")
+    Call<Object> getMyAdDetails(@Body GetMyAdDetailsRequest getMyAdDetailsRequest);
+
+    /**
+     * Get My Ads
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/item/personal/list
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/item/personal/list")
+    Call<Object> getMyAds(@Body GetMyAdsRequest getMyAdsRequest);
+
+    /**
+     * Get Order Detail
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/info
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/info")
+    Call<Object> getOrderDetail(@Body GetOrderDetailRequest getOrderDetailRequest);
+
+    /**
+     * Get Pending Orders
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/pending/simplifyList
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/pending/simplifyList")
+    Call<Object> getPendingOrders(@Body GetPendingOrdersRequest getPendingOrdersRequest);
+
+    /**
+     * Get User Payment
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/user/payment/list
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/user/payment/list")
+    Call<Object> getUserPayment(@Body GetUserPaymentRequest getUserPaymentRequest);
+
+    /**
+     * Mark Order as Paid
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/pay
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/pay")
+    Call<Object> markOrderAsPaid(@Body MarkOrderAsPaidRequest markOrderAsPaidRequest);
+
+    /**
+     * Post Ad
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/item/create
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/item/create")
+    Call<Object> postAd(@Body PostAdRequest postAdRequest);
+
+    /**
+     * Release Assets
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/finish
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/finish")
+    Call<Object> releaseAssets(@Body ReleaseAssetsRequest releaseAssetsRequest);
+
+    /**
+     * Remove Ad
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/item/cancel
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/item/cancel")
+    Call<Object> removeAd(@Body RemoveAdRequest removeAdRequest);
+
+    /**
+     * Send Chat Message
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/order/message/send
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/order/message/send")
+    Call<Object> sendChatMessage(@Body SendChatMessageRequest sendChatMessageRequest);
+
+    /**
+     * Update / Relist Ad
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/item/update
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/p2p/item/update")
+    Call<Object> updateAd(@Body UpdateAdRequest updateAdRequest);
+
+    /**
+     * Upload Chat File
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/p2p/oss/upload_file
+     * <p>
+     * Bybit requires this endpoint to be multipart/form-data with a part named
+     * "upload_file" (snake_case). Supported types: jpg, png, jpeg, pdf, mp4.
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @Multipart
+    @POST("/v5/p2p/oss/upload_file")
+    Call<Object> uploadChatFile(@Part MultipartBody.Part uploadFile);
+
+    /**
+     * Accept Non-LP Quote
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/rfq/accept-other-quote
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/rfq/accept-other-quote")
+    Call<Object> acceptNonLpQuote(@Body AcceptNonLpQuoteRequest acceptNonLpQuoteRequest);
+
+    /**
+     * Get Position Tiers
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/spot-margin-trade/position-tiers
+     *
+     * @param currency false   String   Currency
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/spot-margin-trade/position-tiers")
+    Call<Object> getPositionTiers(@Query("currency") String currency);
+
+    /**
+     * Get Tiered Collateral Ratio
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/spot-margin-trade/collateral
+     *
+     * @param currency false   String   Currency
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/spot-margin-trade/collateral")
+    Call<Object> getTieredCollateralRatio(@Query("currency") String currency);
+
+    /**
+     * Pre-check Order
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/order/pre-check
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/order/pre-check")
+    Call<Object> preCheckOrder(@Body PreCheckOrderRequest preCheckOrderRequest);
+
+    /**
+     * Delete Sub-account
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/user/del-submember
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/user/del-submember")
+    Call<Object> deleteSubMemberV5(@Body DeleteSubMemberV5Request deleteSubMemberV5Request);
+
+    /**
+     * Query Escrow Sub-accounts (Fund Management)
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/user/escrow_sub_members
+     *
+     * @param nextCursor false   Long   Next cursor for pagination
+     * @param pageSize false   Integer   Page size
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/user/escrow_sub_members")
+    Call<Object> queryEscrowSubMembersV5(@Query("nextCursor") Long nextCursor,
+                                         @Query("pageSize") Integer pageSize);
+
+    /**
+     * Query Referrals
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/user/invitation/referrals
+     *
+     * @param cursor false   String   Pagination cursor
+     * @param size false   Integer   Page size
+     * @param status false   String   Referral status (array, pass as comma-separated string)
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/v5/user/invitation/referrals")
+    Call<Object> queryReferrals(@Query("cursor") String cursor,
+                                @Query("size") Integer size,
+                                @Query("status") String status);
+
+    /**
+     * Sign Agreement
+     * <p>
+     * https://bybit-exchange.github.io/docs/v5/user/agreement
+     */
+    @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/v5/user/agreement")
+    Call<Object> signAgreement(@Body SignAgreementRequest signAgreementRequest);
 }

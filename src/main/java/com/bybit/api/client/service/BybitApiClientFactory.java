@@ -427,4 +427,46 @@ public class BybitApiClientFactory {
     public BybitApiAsyncAffiliateRestClient newAsyncAffiliateRestClient() {
         return new BybitApiAsyncAffiliateRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
     }
+
+    /**
+     * Creates a new synchronous/blocking REST client to Earn endpoints
+     */
+    public BybitApiEarnRestClient newEarnRestClient() {
+        return new BybitApiEarnRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
+    }
+
+    /**
+     * Creates a new asynchronous/non-blocking client to Earn endpoints
+     */
+    public BybitApiAsyncEarnRestClient newAsyncEarnRestClient() {
+        return new BybitApiAsyncEarnRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
+    }
+
+    /**
+     * Creates a new synchronous/blocking REST client to Fiat endpoints
+     */
+    public BybitApiFiatRestClient newFiatRestClient() {
+        return new BybitApiFiatRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
+    }
+
+    /**
+     * Creates a new asynchronous/non-blocking client to Fiat endpoints
+     */
+    public BybitApiAsyncFiatRestClient newAsyncFiatRestClient() {
+        return new BybitApiAsyncFiatRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
+    }
+
+    /**
+     * Creates a new synchronous/blocking REST client to P2P endpoints
+     */
+    public BybitApiP2pRestClient newP2pRestClient() {
+        return new BybitApiP2pRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
+    }
+
+    /**
+     * Creates a new asynchronous/non-blocking client to P2P endpoints
+     */
+    public BybitApiAsyncP2pRestClient newAsyncP2pRestClient() {
+        return new BybitApiAsyncP2pRestClientImpl(apiKey, secret, baseUrl, debugMode, recvWindow, logOption, referer);
+    }
 }

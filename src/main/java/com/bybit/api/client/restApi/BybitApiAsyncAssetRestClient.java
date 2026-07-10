@@ -37,4 +37,8 @@ public interface BybitApiAsyncAssetRestClient {
     void getConvertCoinList(AssetDataRequest request, BybitApiCallback<Object> callback);
     void getConvertCoinStatus(AssetDataRequest request, BybitApiCallback<Object> callback);
     void getConvertCoinHistory(AssetDataRequest request, BybitApiCallback<Object> callback);
+
+    default void queryFundingDetail(String createTimeFrom, String createTimeTo, Integer limit, String cursor, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryFundingDetail is not implemented by this client");
+    }
 }

@@ -35,4 +35,7 @@ public interface BybitApiAssetRestClient {
     Object getConvertCoinList(AssetDataRequest request);
     Object getConvertCoinStatus(AssetDataRequest request);
     Object getConvertCoinHistory(AssetDataRequest request);
+    default Object queryFundingDetail(String createTimeFrom, String createTimeTo, Integer limit, String cursor) {
+        throw new UnsupportedOperationException("queryFundingDetail is not implemented by this client");
+    }
 }

@@ -2,6 +2,8 @@ package com.bybit.api.client.restApi;
 
 import com.bybit.api.client.domain.preupgrade.PreUpgradeDataRequest;
 import com.bybit.api.client.domain.user.UserDataRequest;
+import com.bybit.api.client.domain.user.request.DeleteSubMemberV5Request;
+import com.bybit.api.client.domain.user.request.SignAgreementRequest;
 
 /**
  * Bybit API facade, supporting asynchronous/non-blocking access Bybit's REST API.
@@ -31,4 +33,17 @@ public interface BybitApiAsyncUserRestClient {
     void getSubUIDListUnlimited(UserDataRequest subUserRequest, BybitApiCallback<Object> callback);
     void getSubUIDListUnlimited(BybitApiCallback<Object> callback);
     void getSubAccAllAPIKeyInfo(UserDataRequest subUserRequest, BybitApiCallback<Object> callback);
+
+    default void deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("deleteSubMemberV5 is not implemented by this client");
+    }
+    default void queryEscrowSubMembersV5(Long nextCursor, Integer pageSize, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryEscrowSubMembersV5 is not implemented by this client");
+    }
+    default void queryReferrals(String cursor, Integer size, String status, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("queryReferrals is not implemented by this client");
+    }
+    default void signAgreement(SignAgreementRequest signAgreementRequest, BybitApiCallback<Object> callback) {
+        throw new UnsupportedOperationException("signAgreement is not implemented by this client");
+    }
 }

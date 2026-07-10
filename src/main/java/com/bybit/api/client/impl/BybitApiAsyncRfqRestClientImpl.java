@@ -1,5 +1,6 @@
 package com.bybit.api.client.impl;
 
+import com.bybit.api.client.domain.rfq.request.AcceptNonLpQuoteRequest;
 import com.bybit.api.client.domain.rfq.request.RfqDataRequest;
 import com.bybit.api.client.domain.rfq.request.RfqLeg;
 import com.bybit.api.client.domain.rfq.request.RfqQuoteRequest;
@@ -211,6 +212,11 @@ public class BybitApiAsyncRfqRestClientImpl implements BybitApiAsyncRfqRestClien
                 request.getLimit(),
                 request.getCursor()
         ).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void acceptNonLpQuote(AcceptNonLpQuoteRequest acceptNonLpQuoteRequest, BybitApiCallback<Object> callback) {
+        bybitApiService.acceptNonLpQuote(acceptNonLpQuoteRequest).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
 
     private List<Map<String, Object>> convertLegsToMap(List<RfqLeg> legs) {

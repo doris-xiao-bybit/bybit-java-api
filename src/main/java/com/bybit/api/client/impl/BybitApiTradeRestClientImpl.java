@@ -1,6 +1,7 @@
 package com.bybit.api.client.impl;
 
 import com.bybit.api.client.domain.trade.request.BatchOrderRequest;
+import com.bybit.api.client.domain.trade.request.PreCheckOrderRequest;
 import com.bybit.api.client.domain.trade.request.TradeOrderRequest;
 import com.bybit.api.client.restApi.BybitApiService;
 import com.bybit.api.client.restApi.BybitApiTradeRestClient;
@@ -181,5 +182,10 @@ public class BybitApiTradeRestClientImpl implements BybitApiTradeRestClient {
                 order.getLimit(),
                 order.getCursor()
         ));
+    }
+
+    @Override
+    public Object preCheckOrder(PreCheckOrderRequest preCheckOrderRequest) {
+        return executeSync(bybitApiService.preCheckOrder(preCheckOrderRequest));
     }
 }

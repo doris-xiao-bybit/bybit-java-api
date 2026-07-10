@@ -187,4 +187,34 @@ public class BybitApiMarketAsyncRestClientImpl implements BybitApiAsyncMarketDat
                 announcementInfoRequest.getLimit()
         ).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
+
+    @Override
+    public void getAdlAlert(String symbol, BybitApiCallback<Object> callback) {
+        bybitApiService.getAdlAlert(symbol).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getFeeGroupInfo(String productType, String groupId, BybitApiCallback<Object> callback) {
+        bybitApiService.getFeeGroupInfo(productType, groupId).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getIndexPriceComponents(String indexName, BybitApiCallback<Object> callback) {
+        bybitApiService.getIndexPriceComponents(indexName).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getNewDeliveryPrice(String category, String baseCoin, String settleCoin, BybitApiCallback<Object> callback) {
+        bybitApiService.getNewDeliveryPrice(category, baseCoin, settleCoin).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getOrderPriceLimit(String category, String symbol, BybitApiCallback<Object> callback) {
+        bybitApiService.getOrderPriceLimit(category, symbol).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getRpiOrderbook(String category, String symbol, Integer limit, BybitApiCallback<Object> callback) {
+        bybitApiService.getRpiOrderbook(category, symbol, limit).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
 }

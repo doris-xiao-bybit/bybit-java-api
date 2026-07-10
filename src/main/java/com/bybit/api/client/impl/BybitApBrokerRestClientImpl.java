@@ -3,6 +3,7 @@ package com.bybit.api.client.impl;
 import com.bybit.api.client.restApi.BybitApiBrokerRestClient;
 import com.bybit.api.client.restApi.BybitApiService;
 import com.bybit.api.client.domain.broker.request.BrokerDataRequest;
+import com.bybit.api.client.domain.broker.request.SetBrokerApiLimitRequest;
 import com.bybit.api.client.service.BybitJsonConverter;
 
 import static com.bybit.api.client.service.BybitApiServiceGenerator.createService;
@@ -65,5 +66,20 @@ public class BybitApBrokerRestClientImpl implements BybitApiBrokerRestClient {
     public Object getIssuedVoucher(BrokerDataRequest getIssuedVoucherRequest) {
         var request = converter.mapToBrokerGetIssuedVoucherRequest(getIssuedVoucherRequest);
         return executeSync(bybitApiService.getIssuedVoucher(request));
+    }
+
+    @Override
+    public Object queryBrokerAllUidDetails(String uids, Integer limit, String cursor) {
+        return executeSync(bybitApiService.queryBrokerAllUidDetails(uids, limit, cursor));
+    }
+
+    @Override
+    public Object queryBrokerCap() {
+        return executeSync(bybitApiService.queryBrokerCap());
+    }
+
+    @Override
+    public Object setBrokerApiLimit(SetBrokerApiLimitRequest setBrokerApiLimitRequest) {
+        return executeSync(bybitApiService.setBrokerApiLimit(setBrokerApiLimitRequest));
     }
 }

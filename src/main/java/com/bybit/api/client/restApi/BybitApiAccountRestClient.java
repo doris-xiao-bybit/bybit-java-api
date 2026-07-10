@@ -2,6 +2,11 @@ package com.bybit.api.client.restApi;
 
 import com.bybit.api.client.domain.account.request.AccountDataRequest;
 import com.bybit.api.client.domain.account.request.BatchSetCollateralCoinRequest;
+import com.bybit.api.client.domain.account.request.ManualBorrowRequest;
+import com.bybit.api.client.domain.account.request.ManualRepayRequest;
+import com.bybit.api.client.domain.account.request.NoConvertRepayRequest;
+import com.bybit.api.client.domain.account.request.OneClickRepayRequest;
+import com.bybit.api.client.domain.account.request.SetPriceLimitRequest;
 
 public interface BybitApiAccountRestClient {
     // Account endpoints
@@ -21,4 +26,40 @@ public interface BybitApiAccountRestClient {
     Object resetAccountMMP(AccountDataRequest request);
     Object getAccountMMPState(AccountDataRequest request);
     Object getAccountSMPGroup();
+
+    default Object getAccountInstruments(String category, String symbol, Integer limit, String cursor) {
+        throw new UnsupportedOperationException("getAccountInstruments is not implemented by this client");
+    }
+
+    default Object getDcpInfo() {
+        throw new UnsupportedOperationException("getDcpInfo is not implemented by this client");
+    }
+
+    default Object getTransferableAmount(String coinName) {
+        throw new UnsupportedOperationException("getTransferableAmount is not implemented by this client");
+    }
+
+    default Object getUserSettings() {
+        throw new UnsupportedOperationException("getUserSettings is not implemented by this client");
+    }
+
+    default Object manualBorrow(ManualBorrowRequest manualBorrowRequest) {
+        throw new UnsupportedOperationException("manualBorrow is not implemented by this client");
+    }
+
+    default Object manualRepay(ManualRepayRequest manualRepayRequest) {
+        throw new UnsupportedOperationException("manualRepay is not implemented by this client");
+    }
+
+    default Object noConvertRepay(NoConvertRepayRequest noConvertRepayRequest) {
+        throw new UnsupportedOperationException("noConvertRepay is not implemented by this client");
+    }
+
+    default Object oneClickRepay(OneClickRepayRequest oneClickRepayRequest) {
+        throw new UnsupportedOperationException("oneClickRepay is not implemented by this client");
+    }
+
+    default Object setPriceLimit(SetPriceLimitRequest setPriceLimitRequest) {
+        throw new UnsupportedOperationException("setPriceLimit is not implemented by this client");
+    }
 }

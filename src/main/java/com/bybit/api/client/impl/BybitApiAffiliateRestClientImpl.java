@@ -22,4 +22,9 @@ public class BybitApiAffiliateRestClientImpl implements BybitApiAffiliateRestCli
                 request.getSize()
         ));
     }
+
+    @Override
+    public Object getAffiliateSubList(String cursor, Integer size, String startDate, String endDate, Long subAffId) {
+        return executeSync(bybitApiService.getAffiliateSubList(cursor, size, startDate, endDate, subAffId));
+    }
 }

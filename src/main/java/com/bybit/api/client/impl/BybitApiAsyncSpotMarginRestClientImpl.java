@@ -185,4 +185,14 @@ public class BybitApiAsyncSpotMarginRestClientImpl implements BybitApiAsyncSpotM
                 spotMarginDataRequest.getEndTime()
         ).enqueue(new BybitApiCallbackAdapter<>(callback));
     }
+
+    @Override
+    public void getPositionTiers(String currency, BybitApiCallback<Object> callback) {
+        bybitApiService.getPositionTiers(currency).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
+
+    @Override
+    public void getTieredCollateralRatio(String currency, BybitApiCallback<Object> callback) {
+        bybitApiService.getTieredCollateralRatio(currency).enqueue(new BybitApiCallbackAdapter<>(callback));
+    }
 }

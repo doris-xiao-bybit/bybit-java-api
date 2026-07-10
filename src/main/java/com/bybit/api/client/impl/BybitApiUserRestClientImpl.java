@@ -4,6 +4,8 @@ import com.bybit.api.client.restApi.BybitApiService;
 import com.bybit.api.client.restApi.BybitApiUserRestClient;
 import com.bybit.api.client.domain.preupgrade.PreUpgradeDataRequest;
 import com.bybit.api.client.domain.user.UserDataRequest;
+import com.bybit.api.client.domain.user.request.DeleteSubMemberV5Request;
+import com.bybit.api.client.domain.user.request.SignAgreementRequest;
 import com.bybit.api.client.domain.user.request.UserSubMemberRequest;
 import com.bybit.api.client.service.BybitJsonConverter;
 
@@ -185,5 +187,25 @@ public class BybitApiUserRestClientImpl implements BybitApiUserRestClient {
                 request.getLimit(),
                 request.getCursor()
         ));
+    }
+
+    @Override
+    public Object deleteSubMemberV5(DeleteSubMemberV5Request deleteSubMemberV5Request) {
+        return executeSync(bybitApiService.deleteSubMemberV5(deleteSubMemberV5Request));
+    }
+
+    @Override
+    public Object queryEscrowSubMembersV5(Long nextCursor, Integer pageSize) {
+        return executeSync(bybitApiService.queryEscrowSubMembersV5(nextCursor, pageSize));
+    }
+
+    @Override
+    public Object queryReferrals(String cursor, Integer size, String status) {
+        return executeSync(bybitApiService.queryReferrals(cursor, size, status));
+    }
+
+    @Override
+    public Object signAgreement(SignAgreementRequest signAgreementRequest) {
+        return executeSync(bybitApiService.signAgreement(signAgreementRequest));
     }
 }

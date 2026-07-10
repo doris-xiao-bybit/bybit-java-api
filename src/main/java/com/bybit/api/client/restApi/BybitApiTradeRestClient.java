@@ -2,6 +2,7 @@ package com.bybit.api.client.restApi;
 
 import com.bybit.api.client.domain.position.request.PositionDataRequest;
 import com.bybit.api.client.domain.trade.request.BatchOrderRequest;
+import com.bybit.api.client.domain.trade.request.PreCheckOrderRequest;
 import com.bybit.api.client.domain.trade.request.TradeOrderRequest;
 
 import java.io.IOException;
@@ -30,4 +31,7 @@ public interface BybitApiTradeRestClient {
     Object cancelOrder(TradeOrderRequest order);
     Object cancelAllOrder(TradeOrderRequest order);
     Object amendOrder(TradeOrderRequest order);
+    default Object preCheckOrder(PreCheckOrderRequest preCheckOrderRequest) {
+        throw new UnsupportedOperationException("preCheckOrder is not implemented by this client");
+    }
 }
