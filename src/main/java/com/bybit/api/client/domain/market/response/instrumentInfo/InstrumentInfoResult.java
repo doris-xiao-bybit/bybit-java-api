@@ -13,4 +13,6 @@ public class InstrumentInfoResult {
     private String category;
     @JsonProperty("list")
     private List<InstrumentEntry> instrumentEntries;
+    @JsonProperty("nextPageCursor")
+    private String nextPageCursor;
 }
