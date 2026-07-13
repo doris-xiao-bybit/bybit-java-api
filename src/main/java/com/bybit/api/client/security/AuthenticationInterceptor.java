@@ -41,18 +41,30 @@ public class AuthenticationInterceptor implements Interceptor {
 
         boolean isSignatureRequired = original.header(BybitApiConstants.SIGN_TYPE_HEADER) != null;
 
+        boolean isMultipart = false;
+        if (original.body() != null && original.body().contentType() != null) {
+            isMultipart = "multipart".equalsIgnoreCase(original.body().contentType().type());
+        }
+
         // Endpoint requires signing the payload
         String payload = "";
         if ("GET".equals(original.method())) {
             payload = original.url().encodedQuery(); // extract query params
             newRequestBuilder.get();
-        }else if ("POST".equals(original.method()) && original.body() != null) {
-            Buffer buffer = new Buffer();
-            original.body().writeTo(buffer);
-            payload = buffer.readString(StandardCharsets.UTF_8);
-            MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-            RequestBody body = RequestBody.create(payload, mediaType);
-            newRequestBuilder.post(body);
+        } else if ("POST".equals(original.method()) && original.body() != null) {
+            if (isMultipart) {
+                // Preserve multipart body verbatim — reserializing as JSON would drop the
+                // boundary and corrupt binary parts. Bybit signs multipart uploads with an
+                // empty payload string, so `payload` stays "".
+                newRequestBuilder.post(original.body());
+            } else {
+                Buffer buffer = new Buffer();
+                original.body().writeTo(buffer);
+                payload = buffer.readString(StandardCharsets.UTF_8);
+                MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(payload, mediaType);
+                newRequestBuilder.post(body);
+            }
         }
 
         if (isSignatureRequired) {
@@ -62,7 +74,10 @@ public class AuthenticationInterceptor implements Interceptor {
             newRequestBuilder.addHeader(BybitApiConstants.SIGN_HEADER, signature);
             newRequestBuilder.addHeader(BybitApiConstants.TIMESTAMP_HEADER, String.valueOf(timestamp));
             newRequestBuilder.addHeader(BybitApiConstants.RECV_WINDOW_HEADER, String.valueOf(recvWindow));
-            newRequestBuilder.addHeader(BybitApiConstants.API_CONTENT_TYPE, BybitApiConstants.DEFAULT_CONTENT_TYPE);
+            if (!isMultipart) {
+                // Let OkHttp emit the multipart/form-data; boundary=... Content-Type when uploading files.
+                newRequestBuilder.addHeader(BybitApiConstants.API_CONTENT_TYPE, BybitApiConstants.DEFAULT_CONTENT_TYPE);
+            }
             newRequestBuilder.addHeader(BybitApiConstants.USER_AGENT_HEADER, BybitApiConstants.AGENT_NAME + "/" + BybitApiConstants.VERSION);
             newRequestBuilder.addHeader(BybitApiConstants.CONNECTION_HEADER, BybitApiConstants.KEEP_ALIVE);
             if(StringUtils.isNotEmpty(referer))newRequestBuilder.addHeader(BybitApiConstants.BROKER_HEADER, referer);
