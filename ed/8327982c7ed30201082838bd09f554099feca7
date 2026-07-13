@@ -1,0 +1,23 @@
+src/main/java/com/bybit/api/client/security/AuthenticationInterceptor.java
+  6757799014c1c2e7 44-48,54-67,77-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2-bit.10+672fbf0",
+  "base_commit_sha": "ed8327982c7ed30201082838bd09f554099feca7",
+  "prompts": {
+    "6757799014c1c2e7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a8709835-9baf-42c7-92b8-3ee8882e7ccd",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "doris-xiao-bybit",
+      "messages": [],
+      "total_additions": 706,
+      "total_deletions": 8,
+      "accepted_lines": 692,
+      "overriden_lines": 14
+    }
+  }
+}
