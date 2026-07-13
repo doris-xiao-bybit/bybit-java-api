@@ -9,6 +9,8 @@ import lombok.Getter;
 @Getter
 public class InstrumentEntry {
     private String symbol;
+    private Integer symbolId;
+    private String symbolType;
     private String baseCoin;
     private String quoteCoin;
     private String status;
@@ -24,7 +26,16 @@ public class InstrumentEntry {
     private Integer fundingInterval;
     private String settleCoin;
     private String copyTrading;
+    private String upperFundingRate;
+    private String lowerFundingRate;
+    private String displayName;
+    private Boolean forbidUplWithdrawal;
+    private RiskParameters riskParameters;
+    private Boolean isPreListing;
+    private PreListingInfo preListingInfo;
     private String optionsType;
     private String innovation;
     private String marginTrading;
+    private String xstockMultiplier;
+    private String stTag;
 }

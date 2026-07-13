@@ -12,4 +12,9 @@ public class LotSizeFilter {
     private String quotePrecision;
     private String minOrderAmt;
     private String maxOrderAmt;
+    private String minNotionalValue;
+    private String maxMktOrderQty;
+    private String maxLimitOrderQty;
+    private String maxMarketOrderQty;
+    private String postOnlyMaxLimitOrderSize;
 }
