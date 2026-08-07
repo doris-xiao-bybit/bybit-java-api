@@ -5126,33 +5126,54 @@ public interface BybitApiService {
      * Get Broker Earning
      * INFO
      * Use exchange broker master account to query
-     * The data can support up to past 6 months until T-1
-     * startTime and  endTime are either entered at the same time or not entered
+     * The data can support up to past 1 months until T-1. To extract data from over a month ago, please contact your Relationship Manager
+     * begin and end are either entered at the same time or not entered, and latest 7 days data are returned by default
      * <p>
-     * https://bybit-exchange.github.io/docs/v5/broker/earning
+     * https://bybit-exchange.github.io/docs/v5/broker/exchange-broker/exchange-earning
      *
-     * @param bizType   false	string	Business type. SPOT, DERIVATIVES, OPTIONS
-     * @param startTime false	integer	The start timestamp(ms)e
-     * @param endTime   false	integer	The end timestamp(ms)
-     * @param limit     false	integer	Limit for data size per page. [1, 1000]. Default: 1000
-     * @param cursor    false	string	Cursor. Use the nextPageCursor token from the response to retrieve the next page of the result set
+     * @param bizType false	string	Business type. SPOT, DERIVATIVES, OPTIONS, CONVERT
+     * @param begin   false	string	Begin date, in the format of YYYYMMDD, e.g, 20231201, search the data from 1st Dec 2023 00:00:00 UTC (include)
+     * @param end     false	string	End date, in the format of YYYYMMDD, e.g, 20231201, search the data before 2nd Dec 2023 00:00:00 UTC (exclude)
+     * @param uid     false	string	To get results for a specific subaccount: Enter the subaccount UID. To get results for all subaccounts: Leave the field empty
+     * @param limit   false	integer	Limit for data size per page. [1, 1000]. Default: 1000
+     * @param cursor  false	string	Cursor. Use the nextPageCursor token from the response to retrieve the next page of the result set
      * @return Response Parameters
      * Parameter	Type	Comments
-     * list	array	Object
-     * &gt; userId	string	UID
-     * &gt; bizType	string	Business type
+     * totalEarningCat	Object	Category statistics for total earning data
+     * &gt; spot	array	Object. Earning for Spot trading
+     * &gt;&gt; coin	string	Rebate coin name
+     * &gt;&gt; earning	string	Rebate amount of the coin
+     * &gt; derivatives	array	Object. Earning for Derivatives trading
+     * &gt;&gt; coin	string	Rebate coin name
+     * &gt;&gt; earning	string	Rebate amount of the coin
+     * &gt; options	array	Object. Earning for Option trading
+     * &gt;&gt; coin	string	Rebate coin name
+     * &gt;&gt; earning	string	Rebate amount of the coin
+     * &gt; convert	array	Object. Earning for Convert trading
+     * &gt;&gt; coin	string	Rebate coin name
+     * &gt;&gt; earning	string	Rebate amount of the coin
+     * &gt; total	array	Object. Sum earnings of all categories
+     * &gt;&gt; coin	string	Rebate coin name
+     * &gt;&gt; earning	string	Rebate amount of the coin
+     * details	array	Object. Detailed trading information for each sub UID and each category
+     * &gt; userId	string	Sub UID
+     * &gt; bizType	string	Business type. SPOT, DERIVATIVES, OPTIONS, CONVERT
      * &gt; symbol	string	Symbol name
-     * &gt; coin	string	Coin name. The currency of earning
-     * &gt; earning	string	Earning
+     * &gt; coin	string	Rebate coin name
+     * &gt; earning	string	Rebate amount
+     * &gt; markupEarning	string	Earning generated from markup fee rate
+     * &gt; baseFeeEarning	string	Earning generated from base fee rate
      * &gt; orderId	string	Order ID
-     * &gt; execTime	string	Execution timestamp (ms)
+     * &gt; execId	string	Trade ID
+     * &gt; execTime	string	Order execution timestamp (ms)
      * nextPageCursor	string	Refer to the cursor request parameter
      */
     @Headers(BybitApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/v5/broker/earnings-info")
     Call<Object> getBrokerEarningData(@Query("bizType") String bizType,
-                                      @Query("startTime") Long startTime,
-                                      @Query("endTime") Long endTime,
+                                      @Query("begin") String begin,
+                                      @Query("end") String end,
+                                      @Query("uid") String uid,
                                       @Query("limit") Integer limit,
                                       @Query("cursor") String cursor);
 
