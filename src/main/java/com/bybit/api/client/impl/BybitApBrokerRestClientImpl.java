@@ -21,8 +21,9 @@ public class BybitApBrokerRestClientImpl implements BybitApiBrokerRestClient {
     public Object getBrokerEarningData(BrokerDataRequest brokerDataRequest) {
         return executeSync(bybitApiService.getBrokerEarningData(
                 brokerDataRequest.getBizType() == null ? null : brokerDataRequest.getBizType().getType(),
-                brokerDataRequest.getStartTime(),
-                brokerDataRequest.getEndTime(),
+                brokerDataRequest.getBegin(),
+                brokerDataRequest.getEnd(),
+                brokerDataRequest.getUid(),
                 brokerDataRequest.getLimit(),
                 brokerDataRequest.getCursor()
         ));

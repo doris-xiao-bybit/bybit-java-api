@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.6.0 — 2026-08-07
+
+### Fixed — Broker Earnings Info
+- `getBrokerEarningData` (`GET /v5/broker/earnings-info`) parameters aligned with the official docs:
+  - `startTime` (Long) → `begin` (String, `YYYYMMDD`)
+  - `endTime` (Long) → `end` (String, `YYYYMMDD`)
+  - Added `uid` (String) — filter earnings by a specific sub UID
+  - Javadoc / response fields updated to reflect the latest schema
+    (`totalEarningCat`, `markupEarning`, `baseFeeEarning`, `execId`, `CONVERT` bizType)
+
+### Breaking Changes
+- `BybitApiService#getBrokerEarningData` signature changed. Callers using
+  `BrokerDataRequest#setStartTime` / `setEndTime` for this endpoint must switch to
+  the new `begin` / `end` / `uid` fields on `BrokerDataRequest`.
+  (`startTime` / `endTime` remain in `BrokerDataRequest` for other broker endpoints.)
+
 ## 1.5.0 — 2026-07-09
 
 ### Added — New Clients

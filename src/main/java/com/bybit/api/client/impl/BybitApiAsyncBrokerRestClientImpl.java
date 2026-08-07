@@ -20,8 +20,9 @@ public class BybitApiAsyncBrokerRestClientImpl implements BybitApiAsyncBrokerRes
     public void getBrokerEarningData(BrokerDataRequest brokerEarningRequest, BybitApiCallback<Object> callback) {
         bybitApiService.getBrokerEarningData(
                 brokerEarningRequest.getBizType() == null ? null : brokerEarningRequest.getBizType().getType(),
-                brokerEarningRequest.getStartTime(),
-                brokerEarningRequest.getEndTime(),
+                brokerEarningRequest.getBegin(),
+                brokerEarningRequest.getEnd(),
+                brokerEarningRequest.getUid(),
                 brokerEarningRequest.getLimit(),
                 brokerEarningRequest.getCursor()
         ).enqueue(new BybitApiCallbackAdapter<>(callback));

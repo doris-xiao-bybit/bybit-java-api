@@ -19,6 +19,9 @@ public class BrokerDataRequest {
     private String coin;
     private Long startTime;
     private Long endTime;
+    private String begin; // YYYYMMDD, used by /v5/broker/earnings-info
+    private String end;   // YYYYMMDD, used by /v5/broker/earnings-info
+    private String uid;   // Sub UID, used by /v5/broker/earnings-info
     private Integer limit;
     private String cursor;
     private String id; // mandatory; voucher ID in query voucher spec
